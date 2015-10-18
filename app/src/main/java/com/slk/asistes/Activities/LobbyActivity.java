@@ -10,10 +10,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.slk.asistes.R;
-import com.slk.asistes.Tasks.GetProductsTask;
+import com.slk.asistes.Tasks.SearchProductsTask;
 
 public class LobbyActivity extends AppCompatActivity {
 
@@ -36,21 +35,15 @@ public class LobbyActivity extends AppCompatActivity {
 
     public void OnButtonSearchClick(View view)
     {
-        Toast.makeText(this, "Fuck you, Spillberg!!", Toast.LENGTH_SHORT).show();
-
-        GetProductsTask task = new GetProductsTask();
-
+//        Toast.makeText(this, "Fuck you, Spillberg!!", Toast.LENGTH_SHORT).show();
         EditText label = (EditText) findViewById(R.id.search_field);
 
-        task.SetData(label.getText().toString());
-        task.execute("");
+       // SearchProductsTask task = new SearchProductsTask();
+       // task.ExecuteWithData(label.getText().toString());
 
 
-
-
-
-     //  Intent intent = new Intent(LobbyActivity.this,ResultsDataActivity.class);
-      // startActivity(intent);
+       Intent intent = new Intent(LobbyActivity.this,ResultsDataActivity.class);
+       startActivity(intent);
     }
 
 

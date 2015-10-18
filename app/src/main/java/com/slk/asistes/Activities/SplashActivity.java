@@ -2,11 +2,15 @@ package com.slk.asistes.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+
 import com.slk.asistes.R;
+import com.slk.asistes.Static.ApplicationContext;
 
 public class SplashActivity extends Activity {
+    // Splash screen timer
+    private static int SPLASH_TIME_OUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,19 +18,52 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Thread timerThread = new Thread(){
-            public void run(){
-                try{
-                    sleep(4000);
-                }catch(InterruptedException e){
-                    e.printStackTrace();
-                }finally{
-                    Intent intent = new Intent(SplashActivity.this,LobbyActivity.class);
-                    startActivity(intent);
+        ApplicationInitialize();
+
+        if (ApplicationContext.Instance().getSocialManager().hasInternet())
+        {
+
+            new Handler().postDelayed(new Runnable() {
+
+            /*
+             * Showing splash screen with a timer. This will be useful when you
+             * want to show case your app logo / company
+             */
+
+                @Override
+                public void run() {
+                    // This method will be executed once the timer is over
+                    // Start your app main activity
+                    Intent i = new Intent(SplashActivity.this, LobbyActivity.class);
+                    startActivity(i);
+
+                    // close this activity
+                    finish();
                 }
-            }
-        };
-        timerThread.start();
+            }, SPLASH_TIME_OUT);
+//            Thread timerThread = new Thread(){
+//                public void run(){
+//                    try{
+//                        sleep(4000);
+//                    }catch(InterruptedException e){
+//                        e.printStackTrace();
+//                    }finally{
+//                        Intent intent = new Intent(SplashActivity.this,LobbyActivity.class);
+//                        startActivity(intent);
+//                    }
+//                }
+//            };
+//            timerThread.start();
+        }else{
+
+        }
+
+
+    }
+
+    private void ApplicationInitialize()
+    {
+        ApplicationContext.Instance().Initialize(getApplicationContext());
     }
 
     @Override
