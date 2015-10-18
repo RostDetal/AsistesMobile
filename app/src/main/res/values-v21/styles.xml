@@ -1,0 +1,10 @@
+<resources>
+    <!-- inherit from the material theme -->
+    <style name="Theme.Asistes.Splash" parent="android:Theme.Material.Light.NoActionBar.Fullscreen">
+
+    </style>
+
+    <style name="Theme.Asistes.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/asistesStatusBarColor</item>
+    </style>
+</resources>

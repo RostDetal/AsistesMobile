@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
+        <dex dex="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\pre-dexed\debug\classes-6c1ca681c07fc7b7cf6a346d79caea5fdac04e26.jar" />
+    </item>
+    <item
+        jar="D:\AndroidSDK\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-352bae7973ce3431d0057e3aad33427d2db3baf1.jar" />
+    </item>
+    <item
+        jar="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-f7e177699fb78b6fa360e440ee416278e8a47375.jar" />
+    </item>
+    <item
+        jar="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\pre-dexed\debug\classes-b62d3a6fa599a4d89b4ab695dcc4968d314f2164.jar" />
+    </item>
+    <item
+        jar="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\pre-dexed\debug\classes-16388dfd01eeb42d15651e18aec93f3e9777e4ad.jar" />
+    </item>
+    <item
+        jar="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="19026d31f5d3ae868db81319671a642be5fbba08">
+        <dex dex="C:\Users\VIS\AndroidStudioProjects\Asistes\app\build\intermediates\pre-dexed\debug\classes-2dc718334a9b1686fc5ffa1d3f9e652e0fbf30a3.jar" />
+    </item>
+
+</items>
