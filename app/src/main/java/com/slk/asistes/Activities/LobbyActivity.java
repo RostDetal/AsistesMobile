@@ -10,11 +10,22 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.slk.asistes.R;
+import com.slk.asistes.Static.Logger;
 import com.slk.asistes.Tasks.SearchProductsTask;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LobbyActivity extends AppCompatActivity {
+
+    //define callback interface
+    public interface ProductLoadedCallback {
+       public void onProductsLoadingDone(String result);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +49,16 @@ public class LobbyActivity extends AppCompatActivity {
 //        Toast.makeText(this, "Fuck you, Spillberg!!", Toast.LENGTH_SHORT).show();
         EditText label = (EditText) findViewById(R.id.search_field);
 
-       // SearchProductsTask task = new SearchProductsTask();
-       // task.ExecuteWithData(label.getText().toString());
+        SearchProductsTask task = new SearchProductsTask(new ProductLoadedCallback() {
+           @Override
+           public void onProductsLoadingDone(String result) {
+               Intent intent = new Intent(LobbyActivity.this, ResultsDataActivity.class);
+               intent.putExtra("products",result);
+               startActivity(intent);
+           }
+        });
+        task.ExecuteWithData(label.getText().toString());
 
-
-       Intent intent = new Intent(LobbyActivity.this,ResultsDataActivity.class);
-       startActivity(intent);
     }
 
 
@@ -56,7 +71,7 @@ public class LobbyActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
+        // Handle action bar product_item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();

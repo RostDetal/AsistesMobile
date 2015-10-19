@@ -1,26 +1,22 @@
 package com.slk.asistes.Tasks;
 
-import android.content.Context;
-import android.net.http.Headers;
+
+
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.slk.asistes.Static.ApplicationContext;
+
+import com.slk.asistes.Activities.LobbyActivity;
+import com.slk.asistes.Static.Logger;
 
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by VIS on 18.10.2015.
@@ -28,8 +24,16 @@ import java.util.List;
 public class SearchProductsTask extends AsyncTask <String, Void, String>
 {
 
+    final LobbyActivity.ProductLoadedCallback callback;
+
     private String searchData;
     private String token = "48b33ee3a3701c48fb35f75b79be4aedb1035b4b7c84d898";
+
+
+    public SearchProductsTask(LobbyActivity.ProductLoadedCallback callback) {
+        this.callback = callback;
+    }
+
 
     public void ExecuteWithData(String search_data)
     {
@@ -86,17 +90,13 @@ public class SearchProductsTask extends AsyncTask <String, Void, String>
         try
         {
             convertedObject = new JSONObject(content);
-
+            callback.onProductsLoadingDone(content);
+            Logger.toConsole(content);
 
         }catch(Exception ex){
-
+            Logger.toConsole("Error parse JSON");
         }
 
-        Log.d("Asistes", content);
-       // contentText=content;
-       // contentView.setText(content);
-        //Toast.makeText(getActivity(), "Данные загружены", Toast.LENGTH_SHORT)
-          //      .show();
     }
 
 

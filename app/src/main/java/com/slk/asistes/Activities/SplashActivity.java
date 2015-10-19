@@ -7,6 +7,7 @@ import android.os.Handler;
 
 import com.slk.asistes.R;
 import com.slk.asistes.Static.ApplicationContext;
+import com.slk.asistes.Static.Logger;
 
 public class SplashActivity extends Activity {
     // Splash screen timer
@@ -41,21 +42,9 @@ public class SplashActivity extends Activity {
                     finish();
                 }
             }, SPLASH_TIME_OUT);
-//            Thread timerThread = new Thread(){
-//                public void run(){
-//                    try{
-//                        sleep(4000);
-//                    }catch(InterruptedException e){
-//                        e.printStackTrace();
-//                    }finally{
-//                        Intent intent = new Intent(SplashActivity.this,LobbyActivity.class);
-//                        startActivity(intent);
-//                    }
-//                }
-//            };
-//            timerThread.start();
-        }else{
 
+        }else{
+            Logger.toConsole("Have no internet connection");
         }
 
 

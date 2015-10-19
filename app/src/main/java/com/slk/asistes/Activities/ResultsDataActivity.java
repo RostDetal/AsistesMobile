@@ -1,5 +1,6 @@
 package com.slk.asistes.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,11 @@ import android.view.View;
 
 import com.slk.asistes.Adapters.ProductsAdapter;
 import com.slk.asistes.R;
+import com.slk.asistes.Static.Logger;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ResultsDataActivity extends AppCompatActivity {
 
@@ -22,6 +28,21 @@ public class ResultsDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results_data);
+
+
+        Intent activityIntent = getIntent();
+        String json = activityIntent.getStringExtra("products");
+
+        JSONArray productsArray = null;
+        try{
+            JSONObject obj = new JSONObject(json);
+            productsArray = obj.getJSONArray("products");
+            Logger.toConsole("Received");
+
+        }catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.scroll_list);
@@ -39,7 +60,7 @@ public class ResultsDataActivity extends AppCompatActivity {
         arr[0]="1";
         arr[1]="1";
         arr[2]="1";
-        mAdapter = new ProductsAdapter(arr);
+        mAdapter = new ProductsAdapter(productsArray);
         mRecyclerView.setAdapter(mAdapter);
 
 
