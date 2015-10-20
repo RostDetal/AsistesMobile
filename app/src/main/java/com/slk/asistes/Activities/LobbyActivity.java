@@ -31,32 +31,33 @@ public class LobbyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
     }
 
     public void OnButtonSearchClick(View view)
     {
 //        Toast.makeText(this, "Fuck you, Spillberg!!", Toast.LENGTH_SHORT).show();
-        EditText label = (EditText) findViewById(R.id.search_field);
-
-        SearchProductsTask task = new SearchProductsTask(new ProductLoadedCallback() {
-           @Override
-           public void onProductsLoadingDone(String result) {
-               Intent intent = new Intent(LobbyActivity.this, ResultsDataActivity.class);
-               startActivity(intent);
-           }
-        });
-        task.ExecuteWithData(label.getText().toString());
+//        EditText label = (EditText) findViewById(R.id.search_field);
+//
+//        SearchProductsTask task = new SearchProductsTask(new ProductLoadedCallback() {
+//           @Override
+//           public void onProductsLoadingDone(String result) {
+//               Intent intent = new Intent(LobbyActivity.this, ResultsDataActivity.class);
+//               startActivity(intent);
+//           }
+//        });
+//        task.ExecuteWithData(label.getText().toString());
 
     }
 

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Activities.LobbyActivity"
+            android:name=".Activities.LobbyPagerActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -28,25 +28,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activities.ResultsDataActivity"
-            android:label="@string/title_activity_results_data"
-            android:parentActivityName=".Activities.LobbyActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.slk.asistes.Activities.LobbyActivity" />
-        </activity>
+        <!--<activity-->
+            <!--android:name=".Activities.ResultsDataActivity"-->
+            <!--android:label="@string/title_activity_results_data"-->
+            <!--android:parentActivityName=".Activities.LobbyActivity"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" >-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="com.slk.asistes.Activities.LobbyActivity" />-->
+        <!--</activity>-->
 
-        <activity
-            android:name=".Activities.ProductCardActivity"
-            android:label="@string/title_activity_product_card"
-            android:parentActivityName=".Activities.ResultsDataActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.slk.asistes.Activities.ResultsDataActivity" />
-        </activity>
+        <!--<activity-->
+            <!--android:name=".Activities.ProductCardActivity"-->
+            <!--android:label="@string/title_activity_product_card"-->
+            <!--android:parentActivityName=".Activities.ResultsDataActivity"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" >-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="com.slk.asistes.Activities.ResultsDataActivity" />-->
+        <!--</activity>-->
     </application>
 
 </manifest>
