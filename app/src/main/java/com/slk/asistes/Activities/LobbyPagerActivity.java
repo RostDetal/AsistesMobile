@@ -17,20 +17,16 @@ import com.slk.asistes.R;
  */
 public class LobbyPagerActivity  extends AppCompatActivity {
 
-    ViewPager viewPager;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
 
-        InitTabs();
+        TabLayout tabs = (TabLayout) findViewById(R.id.tabs_container);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -42,10 +38,6 @@ public class LobbyPagerActivity  extends AppCompatActivity {
         });
     }
 
-    private void InitTabs()
-    {
-        viewPager = (ViewPager)findViewById(R.id.fragment_viewpager);
-    }
 }
 
 
