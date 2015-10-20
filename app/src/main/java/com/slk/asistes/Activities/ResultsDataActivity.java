@@ -1,6 +1,7 @@
 package com.slk.asistes.Activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,14 +13,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.slk.asistes.Adapters.ProductsAdapter;
+import com.slk.asistes.Fragments.ProductCardFragment;
 import com.slk.asistes.R;
+import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ResultsDataActivity extends AppCompatActivity {
+public class ResultsDataActivity extends AppCompatActivity implements ProductCardFragment.OnFragmentInteractionListener {
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        Logger.toConsole("Blia");
+    }
 
     public interface ProductItemClickProcess {
         public void TryProcess(JSONObject result);
@@ -34,13 +42,9 @@ public class ResultsDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results_data);
 
-
-        Intent activityIntent = getIntent();
-        String json = activityIntent.getStringExtra("products");
-
         JSONArray productsArray = null;
         try{
-            JSONObject obj = new JSONObject(json);
+            JSONObject obj = new JSONObject((String)ApplicationContext.Instance().DataManager().GetLiveData("products"));
             productsArray = obj.getJSONArray("products");
             Logger.toConsole("Received");
 
@@ -63,6 +67,13 @@ public class ResultsDataActivity extends AppCompatActivity {
         mAdapter = new ProductsAdapter(productsArray, new ProductItemClickProcess() {
             @Override
             public void TryProcess(JSONObject result) {
+
+               // if (savedInstanceState == null) {
+                    // During initial setup, plug in the details fragment.
+                   // ProductCardFragment details = new ProductCardFragment();
+                    //details.setArguments(getIntent().getExtras());
+                    //getFragmentManager().beginTransaction().add(R.id.fragment_container, details).commit();
+              //  }
                 Intent productCardIntent = new Intent(ResultsDataActivity.this, ProductCardActivity.class);
                 productCardIntent.putExtra("product", result.toString());
                 startActivity(productCardIntent);
@@ -85,8 +96,6 @@ public class ResultsDataActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-
 
 }
 

@@ -53,7 +53,6 @@ public class LobbyActivity extends AppCompatActivity {
            @Override
            public void onProductsLoadingDone(String result) {
                Intent intent = new Intent(LobbyActivity.this, ResultsDataActivity.class);
-               intent.putExtra("products",result);
                startActivity(intent);
            }
         });

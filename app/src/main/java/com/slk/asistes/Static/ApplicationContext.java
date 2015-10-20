@@ -2,6 +2,7 @@ package com.slk.asistes.Static;
 
 import android.content.Context;
 
+import com.slk.asistes.Managers.DataManager;
 import com.slk.asistes.Managers.SocialManager;
 import com.slk.asistes.Managers.UserManager;
 
@@ -14,6 +15,7 @@ public final class ApplicationContext {
 
     private UserManager _mUserManager;
     private SocialManager _mSocialManager;
+    private DataManager _mDataManager;
     private Context _maContext;
 
 
@@ -30,6 +32,7 @@ public final class ApplicationContext {
         _maContext = _context;
         _mUserManager = new UserManager();
         _mSocialManager = new SocialManager();
+        _mDataManager = new DataManager();
 
         Logger.toConsole("Application static context initializing complete");
     }
@@ -40,6 +43,7 @@ public final class ApplicationContext {
         return _mUserManager;
     }
     public SocialManager getSocialManager(){ return _mSocialManager; }
+    public DataManager DataManager(){ return _mDataManager; }
     public Context getAndroidContext()
     {
         return _maContext;

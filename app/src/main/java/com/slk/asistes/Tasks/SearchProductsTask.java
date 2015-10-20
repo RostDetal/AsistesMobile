@@ -7,6 +7,7 @@ import android.util.Log;
 
 
 import com.slk.asistes.Activities.LobbyActivity;
+import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Logger;
 
 import org.json.JSONObject;
@@ -73,8 +74,8 @@ public class SearchProductsTask extends AsyncTask <String, Void, String>
 
         String content;
         try{
-
             content = GetData();
+            ApplicationContext.Instance().DataManager().SetLiveData("products", content);
         }
         catch (IOException ex){
             content = ex.getMessage();
@@ -85,11 +86,10 @@ public class SearchProductsTask extends AsyncTask <String, Void, String>
 
     @Override
     protected void onPostExecute(String content) {
-        JSONObject convertedObject = null;
 
         try
         {
-            convertedObject = new JSONObject(content);
+
             callback.onProductsLoadingDone(content);
             Logger.toConsole(content);
 
