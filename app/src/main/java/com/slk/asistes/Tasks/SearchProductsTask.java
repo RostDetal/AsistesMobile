@@ -1,16 +1,9 @@
 package com.slk.asistes.Tasks;
 
-
-
 import android.os.AsyncTask;
-import android.util.Log;
-
-
-import com.slk.asistes.Activities.LobbyActivity;
+import com.slk.asistes.Activities.LobbyPagerActivity;
 import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Logger;
-
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,13 +18,13 @@ import java.net.URL;
 public class SearchProductsTask extends AsyncTask <String, Void, String>
 {
 
-    final LobbyActivity.ProductLoadedCallback callback;
+    final LobbyPagerActivity.ProductLoadedCallback callback;
 
     private String searchData;
     private String token = "48b33ee3a3701c48fb35f75b79be4aedb1035b4b7c84d898";
 
 
-    public SearchProductsTask(LobbyActivity.ProductLoadedCallback callback) {
+    public SearchProductsTask(LobbyPagerActivity.ProductLoadedCallback callback) {
         this.callback = callback;
     }
 
@@ -94,7 +87,7 @@ public class SearchProductsTask extends AsyncTask <String, Void, String>
             Logger.toConsole(content);
 
         }catch(Exception ex){
-            Logger.toConsole("Error parse JSON");
+            Logger.toConsole(ex.getMessage());
         }
 
     }

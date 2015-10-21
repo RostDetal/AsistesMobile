@@ -27,6 +27,12 @@ import butterknife.ButterKnife;
  */
 public class TabFragment extends Fragment {
 
+    public enum TabContentType {
+        SEARCH,
+        ABOUT,
+        CONTACTS
+    }
+
     @Bind(R.id.tabs_container)
     TabLayout tabLayout;
 
@@ -47,9 +53,9 @@ public class TabFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(TabContentFragment.newInstance(TabContentFragment.FragmentListTypes.SEARCH), "Поиск");
-        adapter.addFragment(TabContentFragment.newInstance(TabContentFragment.FragmentListTypes.ABOUT), "О нас");
-        adapter.addFragment(TabContentFragment.newInstance(TabContentFragment.FragmentListTypes.CONTACTS), "Контакты");
+        adapter.addFragment(SearchContentFragment.newInstance(TabContentType.SEARCH), "Поиск");
+        adapter.addFragment(TabContentFragment.newInstance(TabContentType.ABOUT), "О нас");
+        adapter.addFragment(TabContentFragment.newInstance(TabContentType.CONTACTS), "Контакты");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

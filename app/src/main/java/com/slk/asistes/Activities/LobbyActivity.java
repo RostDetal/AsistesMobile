@@ -23,9 +23,7 @@ import org.json.JSONObject;
 public class LobbyActivity extends AppCompatActivity {
 
     //define callback interface
-    public interface ProductLoadedCallback {
-       public void onProductsLoadingDone(String result);
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

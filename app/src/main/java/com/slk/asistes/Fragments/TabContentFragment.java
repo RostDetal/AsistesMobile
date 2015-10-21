@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.slk.asistes.R;
@@ -15,33 +16,31 @@ import com.slk.asistes.R;
  */
 public class TabContentFragment  extends Fragment{
 
-    public enum FragmentListTypes {
-        SEARCH,
-        ABOUT,
-        CONTACTS
-    }
+    private TabFragment.TabContentType contentType;
+
+
 
     public interface TabSelectedCallback {
         void onItemSelected(long id);
     }
 
-    public static TabContentFragment newInstance(FragmentListTypes fragmentListType) {
-        TabContentFragment moviesListFragment = new TabContentFragment();
+    public static TabContentFragment newInstance(TabFragment.TabContentType fragmentListType) {
+        TabContentFragment tabContentFragment = new TabContentFragment();
 
         Bundle bundle = new Bundle();
         bundle.putInt("", fragmentListType.ordinal());
-        moviesListFragment.setArguments(bundle);
+        tabContentFragment.setArguments(bundle);
 
-        return moviesListFragment;
+        return tabContentFragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        Bundle bundle = getArguments();
-//        if (bundle != null) {
-//            this.listType = FragmentListTypes.values()[ bundle.getInt("", 0) ];
-//        }
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            this.contentType = TabFragment.TabContentType.values()[ bundle.getInt("", 0) ];
+        }
 //        final View rootView = inflater.inflate(R.layout.fragment_grid_movies, container, false);
 //        final GridView gridLayout = (GridView) rootView.findViewById(R.id.gridview);
 //        moviesAdapter = new MoviesAdapter(getActivity(), null, 0);
@@ -57,8 +56,8 @@ public class TabContentFragment  extends Fragment{
 //        });
 
         final View rootView = inflater.inflate(R.layout.fragment_tab_content, container, false);
-        TextView tv = (TextView)rootView.findViewById(R.id.content_name);
-        tv.setText("asdasd");
+        LinearLayout tv = (LinearLayout)rootView.findViewById(R.id.tab_content_container);
+
         return rootView;
     }
 
