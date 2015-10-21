@@ -11,6 +11,6 @@
 
     <stroke
         android:width="5px"
-        android:color="@color/Asistes.Color.WhiteBlue"/>
+        android:color="@color/Asistes.Color.Blue"/>
 
 </shape>

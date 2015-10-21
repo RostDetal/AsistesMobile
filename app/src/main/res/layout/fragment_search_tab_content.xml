@@ -62,9 +62,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Жми Поиск"
+        android:text="@string/button_search_title"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:textColor="@color/Asistes.Color.Blue"
         android:id="@+id/button_search"
         android:layout_marginTop="20dp"
         android:background="@drawable/button"
