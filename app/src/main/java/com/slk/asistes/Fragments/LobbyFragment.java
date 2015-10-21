@@ -12,7 +12,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 
 import com.slk.asistes.R;
 
@@ -25,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by ViS on 20.10.15.
  */
-public class TabFragment extends Fragment {
+public class LobbyFragment extends Fragment {
 
     public enum TabContentType {
         SEARCH,
@@ -53,12 +52,13 @@ public class TabFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Adapter adapter = new Adapter(getChildFragmentManager());
-        adapter.addFragment(SearchContentFragment.newInstance(TabContentType.SEARCH), "Поиск");
-        adapter.addFragment(TabContentFragment.newInstance(TabContentType.ABOUT), "О нас");
-        adapter.addFragment(TabContentFragment.newInstance(TabContentType.CONTACTS), "Контакты");
+        adapter.addFragment(SearchTabContentFragment.newInstance(TabContentType.SEARCH), "Поиск");
+        adapter.addFragment(TabContentFragment.newInstance(TabContentType.ABOUT), "Отзывы");
+        adapter.addFragment(TabContentFragment.newInstance(TabContentType.CONTACTS), "Правила");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
     }
 
     static class Adapter extends FragmentPagerAdapter {
@@ -76,6 +76,7 @@ public class TabFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
+
             return mFragments.get(position);
         }
 
@@ -88,5 +89,7 @@ public class TabFragment extends Fragment {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
         }
+
+
     }
 }

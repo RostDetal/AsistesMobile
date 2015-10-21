@@ -24,6 +24,13 @@
         android:layout_gravity="center_horizontal"
         />
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_brands"
+        android:layout_gravity="center_horizontal"
+        android:spinnerMode="dropdown" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

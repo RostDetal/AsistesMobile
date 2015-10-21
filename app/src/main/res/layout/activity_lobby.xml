@@ -17,7 +17,7 @@
             android:id="@+id/fragment_lobby_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.slk.asistes.Fragments.TabFragment"
+            android:name="com.slk.asistes.Fragments.LobbyFragment"
             tools:layout="@layout/fragment_lobby_content" />
 
     </LinearLayout>

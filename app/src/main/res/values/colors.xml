@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorAccent">#FF6C00</color>
+    <color name="colorAccent">#f46c05</color>
 
-    <color name="asistesStatusBarColor">#005580</color>
+    <color name="Asistes.StatusBarBackgroundColor">#005580</color>
     <color name="asistesSettingsBarColor">#016394</color>
+
+    <color name="Asistes.TabLayout.CurrentTabIndicatorColor">#f46c05</color>
+    <color name="Asistes.TabLayout.DefaultTextColor">#ffffff</color>
 
 </resources>

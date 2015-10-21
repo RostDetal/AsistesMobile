@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.slk.asistes.R;
 
@@ -16,7 +15,7 @@ import com.slk.asistes.R;
  */
 public class TabContentFragment  extends Fragment{
 
-    private TabFragment.TabContentType contentType;
+    private LobbyFragment.TabContentType contentType;
 
 
 
@@ -24,7 +23,7 @@ public class TabContentFragment  extends Fragment{
         void onItemSelected(long id);
     }
 
-    public static TabContentFragment newInstance(TabFragment.TabContentType fragmentListType) {
+    public static TabContentFragment newInstance(LobbyFragment.TabContentType fragmentListType) {
         TabContentFragment tabContentFragment = new TabContentFragment();
 
         Bundle bundle = new Bundle();
@@ -39,7 +38,7 @@ public class TabContentFragment  extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            this.contentType = TabFragment.TabContentType.values()[ bundle.getInt("", 0) ];
+            this.contentType = LobbyFragment.TabContentType.values()[ bundle.getInt("", 0) ];
         }
 //        final View rootView = inflater.inflate(R.layout.fragment_grid_movies, container, false);
 //        final GridView gridLayout = (GridView) rootView.findViewById(R.id.gridview);

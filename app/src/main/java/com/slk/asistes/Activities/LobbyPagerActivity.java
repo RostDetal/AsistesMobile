@@ -5,20 +5,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.slk.asistes.Fragments.SearchContentFragment;
+import com.slk.asistes.Fragments.SearchTabContentFragment;
 import com.slk.asistes.R;
 import com.slk.asistes.Tasks.SearchProductsTask;
 
 /**
  * Created by ViS on 20.10.15.
  */
-public class LobbyPagerActivity  extends AppCompatActivity implements SearchContentFragment.SearchContentCallback {
+public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabContentFragment.SearchContentCallback {
 
     public interface ProductLoadedCallback {
         public void onProductsLoadingDone(String result);

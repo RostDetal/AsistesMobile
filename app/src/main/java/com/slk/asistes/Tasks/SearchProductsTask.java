@@ -79,17 +79,7 @@ public class SearchProductsTask extends AsyncTask <String, Void, String>
 
     @Override
     protected void onPostExecute(String content) {
-
-        try
-        {
-
-            callback.onProductsLoadingDone(content);
-            Logger.toConsole(content);
-
-        }catch(Exception ex){
-            Logger.toConsole(ex.getMessage());
-        }
-
+        callback.onProductsLoadingDone(content);
     }
 
 
