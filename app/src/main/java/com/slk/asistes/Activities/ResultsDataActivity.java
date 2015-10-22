@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.slk.asistes.Adapters.ProductsAdapter;
 import com.slk.asistes.Data.Product;
@@ -20,7 +21,13 @@ import com.slk.asistes.Static.Logger;
 import com.slk.asistes.Static.Utils;
 import com.slk.asistes.Tasks.SearchProductsTask;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class ResultsDataActivity extends AppCompatActivity implements ProductCardFragment.OnFragmentInteractionListener {
+
+    @Bind(R.id.loader_progress_bar)
+    ProgressBar progressBar;
 
     public interface ProductLoadedCallback {
         public void onProductsLoadingDone(String result);
@@ -39,12 +46,15 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private SearchProductsTask searchTask;
+
     private boolean isSuspended = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results_data);
+        ButterKnife.bind(this);
 
         String search_text = "";
 
@@ -75,13 +85,13 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
 
         if(!HasCachedResultProducts())
         {
-            SearchProductsTask task = new SearchProductsTask(new ProductLoadedCallback() {
+            searchTask = new SearchProductsTask(new ProductLoadedCallback() {
                 @Override
                 public void onProductsLoadingDone(String result) {
                     InitResultProductsList();
                 }
             });
-            task.ExecuteWithData(search_text);
+            searchTask.ExecuteWithData(search_text);
         }else{
             InitResultProductsList();
         }
@@ -104,6 +114,7 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
             }
         });
         mRecyclerView.setAdapter(mAdapter);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -122,6 +133,9 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
 
         if(!isSuspended) {
             ApplicationContext.Instance().DataManager().LiveProducts().clear();
+            if(searchTask!=null && !searchTask.isCancelled()) {
+                searchTask.cancel(true);
+            }
             Logger.toConsole("All data cleared");
         }
     }
