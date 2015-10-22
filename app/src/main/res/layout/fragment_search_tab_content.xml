@@ -67,6 +67,8 @@
         android:textColor="@color/Asistes.Color.Blue"
         android:id="@+id/button_search"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/button"
-         />
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

@@ -1,13 +1,10 @@
 package com.slk.asistes.Tasks;
 
 import android.os.AsyncTask;
-import com.slk.asistes.Activities.LobbyPagerActivity;
+import com.slk.asistes.Activities.ResultsDataActivity;
 import com.slk.asistes.Static.ApplicationContext;
-import com.slk.asistes.Static.Logger;
-
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -18,13 +15,13 @@ import java.net.URL;
 public class SearchProductsTask extends AsyncTask <String, Void, String>
 {
 
-    final LobbyPagerActivity.ProductLoadedCallback callback;
+    final ResultsDataActivity.ProductLoadedCallback callback;
 
     private String searchData;
     private String token = "48b33ee3a3701c48fb35f75b79be4aedb1035b4b7c84d898";
 
 
-    public SearchProductsTask(LobbyPagerActivity.ProductLoadedCallback callback) {
+    public SearchProductsTask(ResultsDataActivity.ProductLoadedCallback callback) {
         this.callback = callback;
     }
 
@@ -68,7 +65,7 @@ public class SearchProductsTask extends AsyncTask <String, Void, String>
         String content;
         try{
             content = GetData();
-            ApplicationContext.Instance().DataManager().SetLiveData("products", content);
+            ApplicationContext.Instance().DataManager().ParseProducts(content);
         }
         catch (IOException ex){
             content = ex.getMessage();

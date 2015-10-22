@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.slk.asistes.Fragments.SearchTabContentFragment;
 import com.slk.asistes.R;
+import com.slk.asistes.Static.Utils;
 import com.slk.asistes.Tasks.SearchProductsTask;
 
 /**
@@ -18,20 +19,12 @@ import com.slk.asistes.Tasks.SearchProductsTask;
  */
 public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabContentFragment.SearchContentCallback {
 
-    public interface ProductLoadedCallback {
-        public void onProductsLoadingDone(String result);
-    }
 
-    @Override
     public void onButtonSearchClick() {
-        SearchProductsTask task = new SearchProductsTask(new ProductLoadedCallback() {
-            @Override
-            public void onProductsLoadingDone(String result) {
-                Intent intent = new Intent(LobbyPagerActivity.this, ResultsDataActivity.class);
-                startActivity(intent);
-            }
-        });
-        task.ExecuteWithData("");
+
+        Intent intent = new Intent(LobbyPagerActivity.this, ResultsDataActivity.class);
+        intent.putExtra(Utils.INTENT_SEARCH_QUERY_EXTRA_ID, "");
+        startActivity(intent);
     }
 
 

@@ -11,18 +11,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.slk.asistes.Activities.ResultsDataActivity;
+import com.slk.asistes.Data.Product;
 import com.slk.asistes.R;
 import com.slk.asistes.Static.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 /**
  * Created by VIS on 18.10.2015.
  */
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHolder> {
-    private JSONArray mDataset;
+    private ArrayList<Product> mDataset;
 
     private ResultsDataActivity.ProductItemClickProcess parentCallback;
 
@@ -60,7 +63,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ProductsAdapter(JSONArray myDataset, ResultsDataActivity.ProductItemClickProcess clickCallbackRef) {
+    public ProductsAdapter(ArrayList<Product> myDataset, ResultsDataActivity.ProductItemClickProcess clickCallbackRef) {
         mDataset = myDataset;
         parentCallback = clickCallbackRef;
     }
@@ -70,48 +73,32 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     public ProductsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
         // create a new view
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
         // set the view's size, margins, paddings and layout parameters
        // ...
-        ViewHolder vh = new ViewHolder((LinearLayout)v);
+        ViewHolder vh = new ViewHolder((LinearLayout)view);
         return vh;
     }
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
 
-        String name = "";
-        String image = "";
-        try {
-            name = (String)mDataset.getJSONObject(position).get("name");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        String name = (String)mDataset.get(position).productName;
 
         holder.productLabel.setText(name);
         holder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(CardView view, int position, boolean isLongClick) {
-                try {
 
-                    parentCallback.TryProcess(mDataset.getJSONObject(position));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+                parentCallback.TryProcess(mDataset.get(position));
             }
         });
-
-    //    holder.productImage.setImageURI("http://stage.asistes.com");
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length();
+        return mDataset.size();
     }
 }

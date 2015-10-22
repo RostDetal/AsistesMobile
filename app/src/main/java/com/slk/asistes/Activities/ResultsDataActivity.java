@@ -6,23 +6,25 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.slk.asistes.Adapters.ProductsAdapter;
+import com.slk.asistes.Data.Product;
 import com.slk.asistes.Fragments.ProductCardFragment;
 import com.slk.asistes.R;
 import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Logger;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.slk.asistes.Static.Utils;
+import com.slk.asistes.Tasks.SearchProductsTask;
 
 public class ResultsDataActivity extends AppCompatActivity implements ProductCardFragment.OnFragmentInteractionListener {
+
+    public interface ProductLoadedCallback {
+        public void onProductsLoadingDone(String result);
+    }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -30,57 +32,32 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
     }
 
     public interface ProductItemClickProcess {
-        public void TryProcess(JSONObject result);
+        public void TryProcess(Product _product);
     }
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private boolean isSuspended = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results_data);
 
-        JSONArray productsArray = null;
-        try{
-            JSONObject obj = new JSONObject((String)ApplicationContext.Instance().DataManager().GetLiveData("products"));
-            productsArray = obj.getJSONArray("products");
-            Logger.toConsole("Received");
+        String search_text = "";
 
-        }catch(JSONException e)
+        if(savedInstanceState!=null)
         {
-            e.printStackTrace();
+            Intent intent = getIntent();
+            search_text = intent.getStringExtra(Utils.INTENT_SEARCH_QUERY_EXTRA_ID);
         }
 
-
         mRecyclerView = (RecyclerView) findViewById(R.id.scroll_list);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mAdapter = new ProductsAdapter(productsArray, new ProductItemClickProcess() {
-            @Override
-            public void TryProcess(JSONObject result) {
-
-               // if (savedInstanceState == null) {
-                    // During initial setup, plug in the details fragment.
-                   // ProductCardFragment details = new ProductCardFragment();
-                    //details.setArguments(getIntent().getExtras());
-                    //getFragmentManager().beginTransaction().add(R.id.fragment_container, details).commit();
-              //  }
-                Intent productCardIntent = new Intent(ResultsDataActivity.this, ProductCardActivity.class);
-                productCardIntent.putExtra("product", result.toString());
-                startActivity(productCardIntent);
-            }
-        });
-        mRecyclerView.setAdapter(mAdapter);
-
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -95,6 +72,64 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(!HasCachedResultProducts())
+        {
+            SearchProductsTask task = new SearchProductsTask(new ProductLoadedCallback() {
+                @Override
+                public void onProductsLoadingDone(String result) {
+                    InitResultProductsList();
+                }
+            });
+            task.ExecuteWithData(search_text);
+        }else{
+            InitResultProductsList();
+        }
+
+
+
+    }
+
+    private void InitResultProductsList()
+    {
+
+        mAdapter = new ProductsAdapter(ApplicationContext.Instance().DataManager().LiveProducts(), new ProductItemClickProcess() {
+            @Override
+            public void TryProcess(Product _product) {
+
+                isSuspended = true;
+                Intent productCardIntent = new Intent(ResultsDataActivity.this, ProductCardActivity.class);
+                productCardIntent.putExtra(Utils.INTENT_PRODUCT_CARD_EXTRA_ID, _product.Id);
+                startActivity(productCardIntent);
+            }
+        });
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Logger.toConsole("Resume");
+        isSuspended = false;
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        Logger.toConsole("Destroy");
+
+        if(!isSuspended) {
+            ApplicationContext.Instance().DataManager().LiveProducts().clear();
+            Logger.toConsole("All data cleared");
+        }
+    }
+
+
+    private boolean HasCachedResultProducts()
+    {
+        return ApplicationContext.Instance().DataManager().LiveProducts().size() > 0;
     }
 
 }
