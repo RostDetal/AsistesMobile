@@ -3,7 +3,7 @@
     <color name="colorAccent">#f46c05</color>
 
     <color name="Asistes.StatusBarBackgroundColor">#005580</color>
-    <color name="asistesSettingsBarColor">#016394</color>
+    <color name="Asistes.SettingsBar.Color">#016394</color>
 
     <color name="Asistes.TabLayout.CurrentTabIndicatorColor">#f46c05</color>
     <color name="Asistes.TabLayout.DefaultTextColor">#ffffff</color>

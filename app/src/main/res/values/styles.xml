@@ -1,10 +1,7 @@
 <resources>
-
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/Asistes.StatusBarBackgroundColor</item>
-        <item name="colorPrimaryDark">@color/asistesSettingsBarColor</item>
+        <item name="colorPrimaryDark">@color/Asistes.SettingsBar.Color</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="AppTheme.NoActionBar">
@@ -21,7 +18,4 @@
         <item name="tabTextColor">@color/Asistes.TabLayout.DefaultTextColor</item>
         <item name="tabIndicatorHeight">3dp</item>
     </style>
-
-
-
 </resources>

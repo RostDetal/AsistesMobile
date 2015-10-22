@@ -21,33 +21,24 @@ public class SplashActivity extends Activity {
 
         ApplicationInitialize();
 
-        if (ApplicationContext.Instance().getSocialManager().hasInternet())
-        {
+        new Handler().postDelayed(new Runnable() {
 
-            new Handler().postDelayed(new Runnable() {
+        /*
+         * Showing splash screen with a timer. This will be useful when you
+         * want to show case your app logo / company
+         */
 
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
+            @Override
+            public void run() {
+                // This method will be executed once the timer is over
+                // Start your app main activity
+                Intent i = new Intent(SplashActivity.this, LobbyPagerActivity.class);
+                startActivity(i);
 
-                @Override
-                public void run() {
-                    // This method will be executed once the timer is over
-                    // Start your app main activity
-                    Intent i = new Intent(SplashActivity.this, LobbyPagerActivity.class);
-                    startActivity(i);
-
-                    // close this activity
-                    finish();
-                }
-            }, SPLASH_TIME_OUT);
-
-        }else{
-            Logger.toConsole("Have no internet connection");
-        }
-
-
+                // close this activity
+                finish();
+            }
+        }, SPLASH_TIME_OUT);
     }
 
     private void ApplicationInitialize()

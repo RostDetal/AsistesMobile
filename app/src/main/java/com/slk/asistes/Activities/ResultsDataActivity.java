@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.slk.asistes.Adapters.ProductsAdapter;
 import com.slk.asistes.Data.Product;
 import com.slk.asistes.Fragments.ProductCardFragment;
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
 public class ResultsDataActivity extends AppCompatActivity implements ProductCardFragment.OnFragmentInteractionListener {
 
     @Bind(R.id.loader_progress_bar)
-    ProgressBar progressBar;
+    CircularProgressView progressBar;
 
     public interface ProductLoadedCallback {
         public void onProductsLoadingDone(String result);
@@ -69,7 +70,6 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -95,9 +95,6 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
         }else{
             InitResultProductsList();
         }
-
-
-
     }
 
     private void InitResultProductsList()
@@ -121,7 +118,6 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
     protected void onResume()
     {
         super.onResume();
-        Logger.toConsole("Resume");
         isSuspended = false;
     }
 

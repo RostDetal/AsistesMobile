@@ -18,17 +18,15 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <ProgressBar
+    <com.github.rahatarmanahmed.cpv.CircularProgressView
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/loader_progress_bar"
-        android:layout_width="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:layout_height="wrap_content"
-        style="@android:style/Widget.ProgressBar.Large"
-        android:progressBackgroundTint="@color/Asistes.Color.WhiteBlue"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:cpv_animAutostart="true"
+        app:cpv_indeterminate="true"
+        app:cpv_color="@color/Asistes.SettingsBar.Color"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -8,9 +8,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.slk.asistes.Fragments.SearchTabContentFragment;
 import com.slk.asistes.R;
+import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Utils;
 import com.slk.asistes.Tasks.SearchProductsTask;
 
@@ -22,9 +24,13 @@ public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabC
 
     public void onButtonSearchClick() {
 
-        Intent intent = new Intent(LobbyPagerActivity.this, ResultsDataActivity.class);
-        intent.putExtra(Utils.INTENT_SEARCH_QUERY_EXTRA_ID, "");
-        startActivity(intent);
+        if(ApplicationContext.Instance().getSocialManager().hasInternet()) {
+            Intent intent = new Intent(LobbyPagerActivity.this, ResultsDataActivity.class);
+            intent.putExtra(Utils.INTENT_SEARCH_QUERY_EXTRA_ID, "");
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "Невозможно загрузить товары. Проверьте интернет соединение.", Toast.LENGTH_LONG).show();
+        }
     }
 
 
