@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.slk.asistes.Fragments.SearchTabContentFragment;
@@ -16,17 +17,22 @@ import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Utils;
 import com.slk.asistes.Tasks.SearchProductsTask;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by ViS on 20.10.15.
  */
 public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabContentFragment.SearchContentCallback {
 
+    @Bind(R.id.toolbar_left_item)
+    ImageView leftButton;
 
-    public void onButtonSearchClick() {
+    public void onButtonSearchClick(String _search_text) {
 
         if(ApplicationContext.Instance().getSocialManager().hasInternet()) {
             Intent intent = new Intent(LobbyPagerActivity.this, ResultsDataActivity.class);
-            intent.putExtra(Utils.INTENT_SEARCH_QUERY_EXTRA_ID, "");
+            intent.putExtra(Utils.INTENT_SEARCH_QUERY_EXTRA_ID, _search_text);
             startActivity(intent);
         }else{
             Toast.makeText(this, "Невозможно загрузить товары. Проверьте интернет соединение.", Toast.LENGTH_LONG).show();
@@ -39,8 +45,12 @@ public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
 
+        ButterKnife.bind(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        leftButton.setVisibility(View.GONE);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

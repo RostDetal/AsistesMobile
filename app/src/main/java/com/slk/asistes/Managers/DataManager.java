@@ -61,6 +61,18 @@ public class DataManager extends BaseManager {
         return _products;
     }
 
+    public Product GetLiveProductByID(int _id)
+    {
+        for (int i=0; i<_products.size(); i++)
+        {
+            Product product =_products.get(i);
+            if(product.Id == _id)
+                return product;
+        }
+
+        return null;
+    }
+
     public void ParseProducts(String data)
     {
         try {

@@ -82,13 +82,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
         String name = mDataset.get(position).productName;
         int price = mDataset.get(position).price;
+        String image_path = mDataset.get(position).images.get(0);
 
         Glide.with(ApplicationContext.Instance().getAndroidContext())
-                .load("http://stage.asistes.com/system/products/5/small/1-s.png?1444804983")
+                .load(image_path)
                 .asBitmap()
                 .into(holder.productImage);
 
-        holder.productLabel.setText(name);
         holder.productLabel.setText(name);
         holder.priceLabel.setText(price+"руб");
         holder.setClickListener(new ItemClickListener() {

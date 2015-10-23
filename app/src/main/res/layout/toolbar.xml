@@ -1,7 +1,7 @@
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbar"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="?attr/actionBarSize"
     android:layout_margin="0dp"
     android:background="?attr/colorPrimary"
@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView3"
+            android:id="@+id/toolbar_left_item"
             android:layout_gravity="left|center_vertical"
             android:src="@drawable/menu"
             android:paddingTop="10dp"

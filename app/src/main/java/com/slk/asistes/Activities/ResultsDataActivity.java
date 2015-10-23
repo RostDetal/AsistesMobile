@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
@@ -57,13 +58,10 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
         setContentView(R.layout.activity_results_data);
         ButterKnife.bind(this);
 
-        String search_text = "";
+        progressBar.setVisibility(View.VISIBLE);
 
-        if(savedInstanceState!=null)
-        {
-            Intent intent = getIntent();
-            search_text = intent.getStringExtra(Utils.INTENT_SEARCH_QUERY_EXTRA_ID);
-        }
+        Intent intent = getIntent();
+        String search_text = intent.getStringExtra(Utils.INTENT_SEARCH_QUERY_EXTRA_ID);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.scroll_list);
         mRecyclerView.setHasFixedSize(true);
@@ -81,7 +79,9 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
                         .setAction("Action", null).show();
             }
         });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
         if(!HasCachedResultProducts())
         {

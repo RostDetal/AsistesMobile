@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.slk.asistes.R;
 
@@ -16,7 +17,7 @@ import com.slk.asistes.R;
 public class SearchTabContentFragment extends Fragment {
 
     public interface SearchContentCallback {
-        void onButtonSearchClick();
+        void onButtonSearchClick(String _search_text);
     }
 
     private LobbyFragment.TabContentType contentType;
@@ -43,11 +44,13 @@ public class SearchTabContentFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.fragment_search_tab_content, container, false);
 
-        Button btn = (Button)rootView.findViewById(R.id.button_search);
+        final Button btn = (Button)rootView.findViewById(R.id.button_search);
+        final EditText searchField = (EditText)rootView.findViewById(R.id.search_edittext);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((SearchContentCallback)getActivity()).onButtonSearchClick();
+                ((SearchContentCallback)getActivity()).onButtonSearchClick(searchField.getText().toString());
             }
         });
 

@@ -5,6 +5,7 @@ import com.slk.asistes.Static.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ public class Product {
     public int price;
     public int totalOnHand;
     public String availableOn;
-    public String[] images;
+    public ArrayList<String> images = new ArrayList<String>();
     public String sku;
 
     public Product(JSONObject data)
@@ -30,6 +31,7 @@ public class Product {
             description = data.getString("description");
             slug = data.getString("slug");
             price = data.getInt("price");
+            images.add("http://stage.asistes.com/system/products/5/large/1-s.png?1444804983");
             totalOnHand = data.getInt("total_on_hand");
             availableOn = data.getString("available_on");
 

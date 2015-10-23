@@ -11,4 +11,6 @@
     <color name="Asistes.Color.Blue">#3350B9</color>
     <color name="Asistes.Color.WhiteBlue">#7487CF</color>
 
+    <color name="Asistes.Color.LightGray">#dddddf</color>
+
 </resources>

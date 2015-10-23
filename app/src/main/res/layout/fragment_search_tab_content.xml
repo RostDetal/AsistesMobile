@@ -59,6 +59,14 @@
         />
 
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_edittext"
+        android:layout_gravity="center_horizontal"
+        android:hint="Введите данные для поиска"
+        />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
