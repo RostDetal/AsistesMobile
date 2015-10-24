@@ -1,5 +1,8 @@
 package com.slk.asistes.Managers;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+
 import com.slk.asistes.Data.Product;
 import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Utils;
@@ -8,6 +11,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -89,6 +96,27 @@ public class DataManager extends BaseManager {
         }catch(JSONException ex){
             ex.printStackTrace();
         }
+    }
+
+    public StringBuilder GetTextFileContentFromAssets(Context context, String file_name)
+    {
+        StringBuilder total = null;
+        AssetManager am = context.getAssets();
+        try {
+            InputStream brandsStream = am.open(file_name);
+            BufferedReader r = new BufferedReader(new InputStreamReader(brandsStream));
+            total = new StringBuilder();
+            String line;
+            while ((line = r.readLine()) != null) {
+                total.append(line);
+            }
+
+        }catch(IOException ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return total;
     }
 
 

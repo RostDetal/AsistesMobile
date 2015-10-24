@@ -11,9 +11,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.slk.asistes.Adapters.BrandsCursorAdapter;
 import com.slk.asistes.Fragments.SearchTabContentFragment;
 import com.slk.asistes.R;
 import com.slk.asistes.Static.ApplicationContext;
+import com.slk.asistes.Static.Logger;
 import com.slk.asistes.Static.Utils;
 import com.slk.asistes.Tasks.SearchProductsTask;
 
@@ -23,11 +25,12 @@ import butterknife.ButterKnife;
 /**
  * Created by ViS on 20.10.15.
  */
-public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabContentFragment.SearchContentCallback {
+public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabContentFragment.SearchContentCallback{
 
     @Bind(R.id.toolbar_left_item)
     ImageView leftButton;
 
+    @Override
     public void onButtonSearchClick(String _search_text) {
 
         if(ApplicationContext.Instance().getSocialManager().hasInternet()) {

@@ -2,9 +2,12 @@ package com.slk.asistes.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.slk.asistes.Data.AsistesDBHelper;
+import com.slk.asistes.Data.AsistesDataBaseContract;
 import com.slk.asistes.R;
 import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Logger;
@@ -44,6 +47,11 @@ public class SplashActivity extends Activity {
     private void ApplicationInitialize()
     {
         ApplicationContext.Instance().Initialize(getApplicationContext());
+        InitDatabase();
+    }
+
+    private void InitDatabase() {
+        AsistesDBHelper dbHelper = new AsistesDBHelper(this);
     }
 
     @Override

@@ -37,6 +37,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         // each data card_product_item is just a string in this case
         public TextView productLabel;
         public TextView priceLabel;
+        public TextView countLabel;
         public ImageView productImage;
         public CardView currentCardView;
         private ItemClickListener clickListener;
@@ -50,6 +51,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             productLabel = (TextView)itemView.findViewById(R.id.card_label);
             productImage = (ImageView)itemView.findViewById(R.id.card_image);
             priceLabel = (TextView)itemView.findViewById(R.id.card_price);
+            countLabel = (TextView)itemView.findViewById(R.id.card_count);
         }
 
         public void setClickListener(ItemClickListener itemClickListener) {
@@ -82,6 +84,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
         String name = mDataset.get(position).productName;
         int price = mDataset.get(position).price;
+        int count = mDataset.get(position).totalOnHand;
         String image_path = mDataset.get(position).images.get(0);
 
         Glide.with(ApplicationContext.Instance().getAndroidContext())
@@ -91,6 +94,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
 
         holder.productLabel.setText(name);
         holder.priceLabel.setText(price+"руб");
+        holder.countLabel.setText("В наличии: "+count );
         holder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(CardView view, int position, boolean isLongClick) {
