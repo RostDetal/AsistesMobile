@@ -9,6 +9,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.slk.asistes.Data.AsistesDataBaseContract;
+import com.slk.asistes.R;
 
 /**
  * Created by VIS on 24.10.2015.

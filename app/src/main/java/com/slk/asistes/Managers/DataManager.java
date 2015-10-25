@@ -26,6 +26,8 @@ public class DataManager extends BaseManager {
     private Hashtable<String, Object> _liveData;
     private ArrayList<Product> _products;
 
+    public boolean IsDatabaseCreationInProgress = false;
+
 
     public DataManager(){
         Init();

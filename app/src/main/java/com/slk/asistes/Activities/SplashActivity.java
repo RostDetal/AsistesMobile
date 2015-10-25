@@ -11,8 +11,9 @@ import com.slk.asistes.Data.AsistesDataBaseContract;
 import com.slk.asistes.R;
 import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Logger;
+import com.slk.asistes.Tasks.FillDataBaseDataTask;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends Activity implements FillDataBaseDataTask.TaskCallback{
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
 
@@ -25,20 +26,11 @@ public class SplashActivity extends Activity {
         ApplicationInitialize();
 
         new Handler().postDelayed(new Runnable() {
-
-        /*
-         * Showing splash screen with a timer. This will be useful when you
-         * want to show case your app logo / company
-         */
-
             @Override
             public void run() {
-                // This method will be executed once the timer is over
-                // Start your app main activity
-                Intent i = new Intent(SplashActivity.this, LobbyPagerActivity.class);
-                startActivity(i);
+                FillDataBaseDataTask task = new FillDataBaseDataTask(SplashActivity.this);
+                task.execute();
 
-                // close this activity
                 finish();
             }
         }, SPLASH_TIME_OUT);
@@ -47,17 +39,23 @@ public class SplashActivity extends Activity {
     private void ApplicationInitialize()
     {
         ApplicationContext.Instance().Initialize(getApplicationContext());
-        InitDatabase();
     }
 
-    private void InitDatabase() {
-        AsistesDBHelper dbHelper = new AsistesDBHelper(this);
-    }
+
 
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub
         super.onPause();
         finish();
+    }
+
+    @Override
+    public void onTaskComplete() {
+        Intent i = new Intent(SplashActivity.this, LobbyPagerActivity.class);
+        startActivity(i);
+
+
+        Logger.toConsole("Starting Lobby");
     }
 }

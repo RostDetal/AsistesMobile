@@ -13,7 +13,6 @@
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,13 +31,21 @@
             android:layout_gravity="center_horizontal"
             />
 
-        <Spinner
+        <android.support.v4.widget.DrawerLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_brands"
-            android:layout_gravity="center_horizontal"
-            android:spinnerMode="dialog"
-            android:background="@drawable/spinner_backgroud"/>
+            android:layout_height="40dp"
+            android:background="@drawable/spinner_backgroud"
+            android:layout_marginBottom="10dp">
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinner_brands"
+                android:spinnerMode="dialog"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+        </android.support.v4.widget.DrawerLayout>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -49,14 +56,20 @@
             android:layout_gravity="center_horizontal"
             />
 
-        <Spinner
+        <android.support.v4.widget.DrawerLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:id="@+id/spinner_models"
-            android:layout_gravity="center_horizontal"
-            android:spinnerMode="dialog"
             android:background="@drawable/spinner_backgroud"
-            />
+            android:layout_marginBottom="10dp">
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinner_models"
+                android:spinnerMode="dialog"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+        </android.support.v4.widget.DrawerLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -67,13 +80,20 @@
             android:layout_gravity="center_horizontal"
             />
 
-        <Spinner
+        <android.support.v4.widget.DrawerLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_modifications"
-            android:layout_gravity="center_horizontal"
-            android:spinnerMode="dialog"
-            android:background="@drawable/spinner_backgroud"/>
+            android:layout_height="40dp"
+            android:background="@drawable/spinner_backgroud"
+            android:layout_marginBottom="10dp">
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinner_modifications"
+                android:spinnerMode="dialog"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+        </android.support.v4.widget.DrawerLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -84,13 +104,20 @@
             android:layout_gravity="center_horizontal"
             />
 
-        <Spinner
+        <android.support.v4.widget.DrawerLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner_year"
-            android:layout_gravity="center_horizontal"
-            android:spinnerMode="dialog"
-            android:background="@drawable/spinner_backgroud"/>
+            android:layout_height="40dp"
+            android:background="@drawable/spinner_backgroud"
+            android:layout_marginBottom="10dp">
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/spinner_year"
+                android:spinnerMode="dialog"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+        </android.support.v4.widget.DrawerLayout>
 
 
         <TextView

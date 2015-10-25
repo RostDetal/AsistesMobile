@@ -63,6 +63,8 @@ public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabC
                         .setAction("Action", null).show();
             }
         });
+
+        fab.setVisibility(View.GONE);
     }
 
 }
