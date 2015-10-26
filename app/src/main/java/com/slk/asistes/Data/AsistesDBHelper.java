@@ -22,10 +22,10 @@ import java.io.InputStreamReader;
 /**
  * Created by VIS on 23.10.2015.
  */
-public class AsistesDBHelper extends SQLiteOpenHelper {
+public class AsistesDBHelper extends SQLiteAssetHelper {
 
-    private final static int DATABASE_VERSION = 11;
-    public final static String DATABASE_NAME = "asistes.db";
+    private final static int DATABASE_VERSION = 1;
+    public final static String DATABASE_NAME = "asistes_prepopulated.db";
 
     private Context context;
 
@@ -35,9 +35,10 @@ public class AsistesDBHelper extends SQLiteOpenHelper {
         context = _context;
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
+   // @Override
+   // public void onCreate(SQLiteDatabase db) {
 
+        /*
         ApplicationContext.Instance().DataManager().IsDatabaseCreationInProgress = true;
 
         final String SQL_CREATE_BRANDS_TABLE = "CREATE TABLE " + BrandEntry.TABLE_NAME + " (" +
@@ -126,8 +127,8 @@ public class AsistesDBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_MODELS_TABLE);
         db.execSQL(SQL_CREATE_MODIFICATIONS_TABLE);
 
-        InsertPreInstalledData(db);
-    }
+        InsertPreInstalledData(db);*/
+  //  }
 
     private void InsertBrands(SQLiteDatabase database)
     {
@@ -205,11 +206,16 @@ public class AsistesDBHelper extends SQLiteOpenHelper {
         return retCursor;
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + BrandEntry.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + ModelEntry.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + ModificationEntry.TABLE_NAME);
-        onCreate(db);
+    public Cursor GetYearsByModelId(int model_id)
+    {
+        
     }
+
+ //   @Override
+   // public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+      // db.execSQL("DROP TABLE IF EXISTS " + BrandEntry.TABLE_NAME);
+       // db.execSQL("DROP TABLE IF EXISTS " + ModelEntry.TABLE_NAME);
+       // db.execSQL("DROP TABLE IF EXISTS " + ModificationEntry.TABLE_NAME);
+       // onCreate(db);
+  //  }
 }

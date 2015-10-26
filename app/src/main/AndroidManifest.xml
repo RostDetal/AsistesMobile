@@ -14,7 +14,7 @@
 
         <activity
             android:name=".Activities.SplashActivity"
-            android:theme="@style/Theme.Asistes.Splash" >
+            android:theme="@style/Theme.Asistes.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,7 +24,8 @@
         <activity
             android:name=".Activities.LobbyPagerActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode = "adjustPan">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

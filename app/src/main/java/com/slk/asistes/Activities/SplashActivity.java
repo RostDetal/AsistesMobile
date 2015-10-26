@@ -13,7 +13,7 @@ import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Logger;
 import com.slk.asistes.Tasks.FillDataBaseDataTask;
 
-public class SplashActivity extends Activity implements FillDataBaseDataTask.TaskCallback{
+public class SplashActivity extends Activity{
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 3000;
 
@@ -28,9 +28,9 @@ public class SplashActivity extends Activity implements FillDataBaseDataTask.Tas
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                FillDataBaseDataTask task = new FillDataBaseDataTask(SplashActivity.this);
-                task.execute();
-
+                Logger.toConsole("Starting Lobby");
+                Intent i = new Intent(SplashActivity.this, LobbyPagerActivity.class);
+                startActivity(i);
                 finish();
             }
         }, SPLASH_TIME_OUT);
@@ -39,23 +39,13 @@ public class SplashActivity extends Activity implements FillDataBaseDataTask.Tas
     private void ApplicationInitialize()
     {
         ApplicationContext.Instance().Initialize(getApplicationContext());
+        InitDatabase();
     }
 
 
-
-    @Override
-    protected void onPause() {
-        // TODO Auto-generated method stub
-        super.onPause();
-        finish();
+    private void InitDatabase() {
+        AsistesDBHelper dbHelper = new AsistesDBHelper(getApplicationContext());
+        dbHelper.getReadableDatabase();
     }
 
-    @Override
-    public void onTaskComplete() {
-        Intent i = new Intent(SplashActivity.this, LobbyPagerActivity.class);
-        startActivity(i);
-
-
-        Logger.toConsole("Starting Lobby");
-    }
 }

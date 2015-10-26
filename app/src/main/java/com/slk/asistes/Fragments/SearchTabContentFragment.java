@@ -5,14 +5,17 @@ import android.database.sqlite.SQLiteCursor;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.slk.asistes.Adapters.BrandsCursorAdapter;
 import com.slk.asistes.Adapters.ModelsCursorAdapter;
@@ -68,7 +71,15 @@ public class SearchTabContentFragment extends Fragment{
 
         final Button btn = (Button)rootView.findViewById(R.id.button_search);
         final EditText searchField = (EditText)rootView.findViewById(R.id.search_edittext);
-
+        searchField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_GO) {
+                    ((SearchContentCallback)getActivity()).onButtonSearchClick(v.getText().toString());
+                }
+                return false;
+            }
+        });
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
