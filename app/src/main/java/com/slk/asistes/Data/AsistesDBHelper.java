@@ -206,9 +206,23 @@ public class AsistesDBHelper extends SQLiteAssetHelper {
         return retCursor;
     }
 
+    public Cursor GetModificationsByModelIdAndYears(int model_id, int year)
+    {
+        Cursor retCursor;
+        SQLiteDatabase database = getReadableDatabase();
+        String selection = ModificationEntry.COLUMN_NAME_MODEL_ID+" = "+model_id +
+                " AND "+year+" BETWEEN "+ModificationEntry.COLUMN_NAME_YEAR_FROM +" AND "+ModificationEntry.COLUMN_NAME_YEAR_TO;
+        retCursor = database.query(ModificationEntry.TABLE_NAME, null ,selection,null,null,null,null);
+        return retCursor;
+    }
+
     public Cursor GetYearsByModelId(int model_id)
     {
-        
+        Cursor retCursor;
+        SQLiteDatabase database = getReadableDatabase();
+        retCursor = database.rawQuery("SELECT MIN("+ModificationEntry.COLUMN_NAME_YEAR_FROM+") as min, MAX("+ModificationEntry.COLUMN_NAME_YEAR_TO+") as max FROM "+ModificationEntry.TABLE_NAME + " WHERE "+ModificationEntry.COLUMN_NAME_MODEL_ID+" = ?", new String[] {String.valueOf(model_id)});
+        retCursor.moveToFirst();
+        return retCursor;
     }
 
  //   @Override

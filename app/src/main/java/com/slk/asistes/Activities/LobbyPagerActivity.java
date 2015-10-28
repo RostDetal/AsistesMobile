@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.slk.asistes.Adapters.BrandsCursorAdapter;
 import com.slk.asistes.Fragments.SearchTabContentFragment;
 import com.slk.asistes.R;
@@ -27,6 +30,10 @@ import butterknife.ButterKnife;
  */
 public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabContentFragment.SearchContentCallback{
 
+    GoogleAnalytics analytics = GoogleAnalytics.getInstance(ApplicationContext.Instance().getAndroidContext());
+    Tracker tracker = analytics.newTracker(R.xml.app_tracker);
+
+
     @Bind(R.id.toolbar_left_item)
     ImageView leftButton;
 
@@ -37,6 +44,13 @@ public class LobbyPagerActivity  extends AppCompatActivity implements SearchTabC
             Intent intent = new Intent(LobbyPagerActivity.this, ResultsDataActivity.class);
             intent.putExtra(Utils.INTENT_SEARCH_QUERY_EXTRA_ID, _search_text);
             startActivity(intent);
+
+
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory("Search")
+                    .setAction("Click For Search: ")
+                    .setLabel(_search_text)
+                    .build());
         }else{
             Toast.makeText(this, "Невозможно загрузить товары. Проверьте интернет соединение.", Toast.LENGTH_LONG).show();
         }
