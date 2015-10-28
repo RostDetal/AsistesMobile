@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.slk.asistes.Adapters.ProductsAdapter;
@@ -30,6 +31,9 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
 
     @Bind(R.id.loader_progress_bar)
     CircularProgressView progressBar;
+
+    @Bind(R.id.search_results_count)
+    TextView searchResultsCountLabel;
 
     public interface ProductLoadedCallback {
         public void onProductsLoadingDone(String result);
@@ -58,6 +62,9 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
         setContentView(R.layout.activity_results_data);
         ButterKnife.bind(this);
 
+
+
+
         progressBar.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
@@ -71,6 +78,8 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().hide();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +90,6 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
 
         if(!HasCachedResultProducts())
         {
@@ -100,6 +108,7 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
     private void InitResultProductsList()
     {
 
+        searchResultsCountLabel.setText(ApplicationContext.Instance().getAndroidContext().getString(R.string.products_results)+" "+ApplicationContext.Instance().DataManager().LiveProducts().size());
         mAdapter = new ProductsAdapter(ApplicationContext.Instance().DataManager().LiveProducts(), new ProductItemClickProcess() {
             @Override
             public void TryProcess(Product _product) {
@@ -112,6 +121,7 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
         });
         mRecyclerView.setAdapter(mAdapter);
         progressBar.setVisibility(View.INVISIBLE);
+        getSupportActionBar().show();
     }
 
     @Override

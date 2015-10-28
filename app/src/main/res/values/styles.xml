@@ -23,4 +23,8 @@
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="Theme.Asistes.ActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="colorControlNormal">@color/Asistes.Color.White</item>
+    </style>
+
 </resources>

@@ -15,4 +15,6 @@
     <color name="Asistes.Color.LightGray">#dddddf</color>
     <color name="Asistes.Color.MediumGray">#b4b4b4</color>
 
+    <color name="Asistes.Color.White">#ffffff</color>
+
 </resources>

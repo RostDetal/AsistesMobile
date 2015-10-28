@@ -101,6 +101,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         Glide.with(ApplicationContext.Instance().getAndroidContext())
                 .load(image_path)
                 .asBitmap()
+                .centerCrop()
                 .into(holder.productImage);
 
         holder.productLabel.setText(name);

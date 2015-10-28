@@ -1,0 +1,41 @@
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="fill_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_margin="0dp"
+    android:background="?attr/colorPrimary"
+    android:contentInsetLeft="10dp"
+    android:contentInsetRight="10dp"
+    android:contentInsetStart="10dp"
+    android:minHeight="?attr/actionBarSize"
+    android:padding="0dp"
+    app:contentInsetLeft="10dp"
+    app:contentInsetRight="10dp"
+    app:contentInsetStart="10dp"
+    android:theme="@style/Theme.Asistes.ActionBar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_activity_results_data"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/search_results_count"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Найдено товаров: 20"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.Toolbar>
