@@ -106,7 +106,7 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
 
                 isSuspended = true;
                 Intent productCardIntent = new Intent(ResultsDataActivity.this, ProductCardActivity.class);
-                productCardIntent.putExtra(Utils.INTENT_PRODUCT_CARD_EXTRA_ID, _product.Id);
+                productCardIntent.putExtra(Utils.INTENT_PRODUCT_CARD_EXTRA_ID, _product.ID());
                 startActivity(productCardIntent);
             }
         });
@@ -125,15 +125,15 @@ public class ResultsDataActivity extends AppCompatActivity implements ProductCar
     protected void onDestroy()
     {
         super.onDestroy();
-        Logger.toConsole("Destroy");
-
-        if(!isSuspended) {
+        if(super.isFinishing() && !isSuspended) {
             ApplicationContext.Instance().DataManager().LiveProducts().clear();
             if(searchTask!=null && !searchTask.isCancelled()) {
                 searchTask.cancel(true);
             }
             Logger.toConsole("All data cleared");
         }
+
+        Logger.toConsole("Destroy");
     }
 
 

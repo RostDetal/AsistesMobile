@@ -75,7 +75,7 @@ public class DataManager extends BaseManager {
         for (int i=0; i<_products.size(); i++)
         {
             Product product =_products.get(i);
-            if(product.Id == _id)
+            if(product.ID() == _id)
                 return product;
         }
 

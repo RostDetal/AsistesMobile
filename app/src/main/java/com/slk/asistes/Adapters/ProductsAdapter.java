@@ -1,5 +1,6 @@
 package com.slk.asistes.Adapters;
 
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.slk.asistes.Activities.ResultsDataActivity;
 import com.slk.asistes.Data.Product;
 import com.slk.asistes.R;
 import com.slk.asistes.Static.ApplicationContext;
+import com.slk.asistes.Static.Utils;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         // each data card_product_item is just a string in this case
         public TextView productLabel;
         public TextView priceLabel;
+        public TextView artikulLabel;
         public TextView countLabel;
+        public TextView sellerLabel;
+        public TextView locationLabel;
         public ImageView productImage;
         public CardView currentCardView;
         private ItemClickListener clickListener;
@@ -52,6 +57,9 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             productImage = (ImageView)itemView.findViewById(R.id.card_image);
             priceLabel = (TextView)itemView.findViewById(R.id.card_price);
             countLabel = (TextView)itemView.findViewById(R.id.card_count);
+            artikulLabel = (TextView)itemView.findViewById(R.id.card_sku);
+            sellerLabel = (TextView)itemView.findViewById(R.id.card_seller);
+            locationLabel = (TextView)itemView.findViewById(R.id.card_location);
         }
 
         public void setClickListener(ItemClickListener itemClickListener) {
@@ -74,7 +82,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     public ProductsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_product_item, parent, false);
-        ViewHolder vh = new ViewHolder((LinearLayout)view);
+        ViewHolder vh = new ViewHolder((CardView)view);
         return vh;
     }
 
@@ -82,10 +90,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        String name = mDataset.get(position).productName;
-        int price = mDataset.get(position).price;
-        int count = mDataset.get(position).totalOnHand;
-        String image_path = mDataset.get(position).images.get(0);
+        String name = mDataset.get(position).Name();
+        int price = mDataset.get(position).Price();
+        int count = mDataset.get(position).TotalOnHand();
+        String sku = mDataset.get(position).Sku();
+        String image_path = mDataset.get(position).Images().get(0);
+
+        Context context =  ApplicationContext.Instance().getAndroidContext();
 
         Glide.with(ApplicationContext.Instance().getAndroidContext())
                 .load(image_path)
@@ -93,8 +104,11 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
                 .into(holder.productImage);
 
         holder.productLabel.setText(name);
-        holder.priceLabel.setText(price+"руб");
-        holder.countLabel.setText("В наличии: "+count );
+        holder.priceLabel.setText(price+" "+ Utils.RUBLE);
+        holder.countLabel.setText(context.getString(R.string.product_count)+" "+count );
+        holder.artikulLabel.setText(context.getString(R.string.product_artikul)+ " " +sku);
+        holder.sellerLabel.setText(context.getString(R.string.product_seller) + " " + sku);
+
         holder.setClickListener(new ItemClickListener() {
             @Override
             public void onClick(CardView view, int position, boolean isLongClick) {

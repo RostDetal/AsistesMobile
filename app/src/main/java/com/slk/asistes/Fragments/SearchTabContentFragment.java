@@ -51,7 +51,6 @@ public class SearchTabContentFragment extends Fragment{
     }
 
 
-
     private Spinner brandsSpinner;
     private Spinner modelsSpinner;
     private Spinner yearsSpinner;

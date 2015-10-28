@@ -7,4 +7,9 @@
     <style name="Theme.Asistes.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:colorPrimary">@color/Asistes.StatusBarBackgroundColor</item>
     </style>
+
+    <style name="Theme.Asistes.CardView" parent="CardView.Light">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
 </resources>

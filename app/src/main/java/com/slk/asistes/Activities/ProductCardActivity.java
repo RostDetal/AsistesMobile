@@ -61,10 +61,10 @@ public class ProductCardActivity extends AppCompatActivity {
 
     private void InitProductCard()
     {
-        Glide.with(this).load(viewableProduct.images.get(0)).into(image);
+        Glide.with(this).load(viewableProduct.Images().get(0)).into(image);
 
-        name.setText(viewableProduct.productName);
-        price.setText(viewableProduct.price + " руб.");
+        name.setText(viewableProduct.Name());
+        price.setText(viewableProduct.Price() +" "+Utils.RUBLE);
     }
 
 }

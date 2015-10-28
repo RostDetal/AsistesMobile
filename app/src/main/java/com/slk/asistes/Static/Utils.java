@@ -21,6 +21,8 @@ public class Utils {
 
     public static final String DATAMANAGER_PRODUCTS_KEY = "products";
 
+    public static final String RUBLE = "\u20bd";
+
 
 
     private static final String TAG = SQLiteAssetHelper.class.getSimpleName();

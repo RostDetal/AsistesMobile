@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="2dp"
-    android:background="@drawable/card_product_item">
 
-    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="100dp" android:id="@+id/product_card_item">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_card_item"
+
+    android:layout_marginBottom="8dp"
+    android:elevation="2dp"
+    android:theme="@style/Theme.Asistes.CardView">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -15,11 +18,11 @@
             android:weightSum="1">
 
             <ImageView
-                android:layout_width="100dp"
+                android:layout_width="140dp"
                 android:layout_height="match_parent"
                 android:id="@+id/card_image"
                 android:layout_marginRight="10dp"
-                />
+                android:layout_gravity="left" />
 
             <LinearLayout
             android:layout_width="match_parent"
@@ -29,11 +32,22 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18dp"
+                    android:textSize="14dp"
                     android:id="@+id/card_label"
-                    android:text="Рулевая рейка"
+                    android:text="Рулевая рейка для мерседес бенц asds sdfsdf"
                     android:textColor="#050000"
-                    android:maxLines="1"/>
+                    android:maxLines="2"
+                    android:layout_marginTop="7dp"
+                    android:lineSpacingMultiplier = "0.7"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:id="@+id/card_price"
+                    android:textColor="@color/Asistes.Color.Blue"
+                    android:text="500 \u20bd"
+                    android:layout_marginTop="2dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -42,7 +56,7 @@
                     android:id="@+id/card_sku"
                     android:text="A1635458237"
                     android:textColor="#580303"
-                    android:layout_marginTop="-4dp" />
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -50,7 +64,7 @@
                     android:textSize="11dp"
                     android:id="@+id/card_location"
                     android:text="Московская область, Мытищи"
-                    android:layout_marginTop="-3dp" />
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -58,7 +72,7 @@
                     android:textSize="11dp"
                     android:id="@+id/card_seller"
                     android:text="ООО ВасяПукин"
-                    android:layout_marginTop="-4dp" />
+                   />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -66,16 +80,7 @@
                     android:textSize="11dp"
                     android:id="@+id/card_count"
                     android:text="В наличии: 10"
-                    android:layout_marginTop="-4dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="24dp"
-                    android:id="@+id/card_price"
-                    android:textColor="@color/Asistes.Color.Blue"
-                    android:text="500 рублей"
-                    android:layout_marginTop="-8dp" />
+                   />
 
             </LinearLayout>
 
@@ -84,4 +89,3 @@
 
     </android.support.v7.widget.CardView>
 
-</LinearLayout>
