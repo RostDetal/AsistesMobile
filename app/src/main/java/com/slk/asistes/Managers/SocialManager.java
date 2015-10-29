@@ -1,5 +1,6 @@
 package com.slk.asistes.Managers;
 
+import android.accounts.AccountManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;

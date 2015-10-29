@@ -30,6 +30,8 @@ public class ProductCardActivity extends AppCompatActivity {
     @Bind(R.id.product_card_price)
     TextView price;
 
+    @Bind(R.id.product_card_description)
+    TextView description;
 
     private Product viewableProduct;
 
@@ -65,6 +67,10 @@ public class ProductCardActivity extends AppCompatActivity {
 
         name.setText(viewableProduct.Name());
         price.setText(viewableProduct.Price() +" "+Utils.RUBLE);
+
+        description.setText(viewableProduct.Description());
+
+
     }
 
 }

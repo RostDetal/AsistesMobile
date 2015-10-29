@@ -9,6 +9,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.slk.asistes.Data.AsistesDataBaseContract;
+import com.slk.asistes.R;
 
 /**
  * Created by VIS on 24.10.2015.
@@ -21,12 +22,12 @@ public class ModificationsCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_item, parent, false);
+        return LayoutInflater.from(context).inflate(R.layout.drop_down_item, parent, false);
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView tvBody = (TextView) view.findViewById(android.R.id.text1);
+        TextView tvBody = (TextView) view.findViewById(R.id.drop_down_title);
         tvBody.setText(cursor.getString(cursor.getColumnIndex(AsistesDataBaseContract.ModificationEntry.COLUMN_NAME_TITLE)));
     }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.slk.asistes.Data.AsistesDataBaseContract.BrandEntry;
 import com.slk.asistes.Fragments.SearchTabContentFragment;
+import com.slk.asistes.R;
 
 /**
  * Created by VIS on 24.10.2015.
@@ -25,13 +26,13 @@ public class BrandsCursorAdapter extends CursorAdapter
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View view =  LayoutInflater.from(context).inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
+        View view =  LayoutInflater.from(context).inflate(R.layout.drop_down_item, parent, false);
         return view;
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView tvBody = (TextView) view.findViewById(android.R.id.text1);
+        TextView tvBody = (TextView) view.findViewById(R.id.drop_down_title);
         tvBody.setText(cursor.getString(cursor.getColumnIndex(BrandEntry.COLUMN_NAME_TITLE)));
     }
 

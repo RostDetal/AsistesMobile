@@ -228,7 +228,7 @@ public class SearchTabContentFragment extends Fragment{
             }
         }
 
-        ArrayAdapter<String> years = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item, tempValues);
+        ArrayAdapter<String> years = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_item, R.id.drop_down_title, tempValues);
 
         yearsSpinner = (Spinner)getActivity().findViewById(R.id.spinner_year);
         yearsSpinner.setAdapter(years);
@@ -237,7 +237,6 @@ public class SearchTabContentFragment extends Fragment{
         yearsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 ApplicationContext.Instance().DataManager().SetLiveData(DataType.Year, Integer.valueOf((String) yearsSpinner.getSelectedItem()));
                 ApplicationContext.Instance().DataManager().SetLiveData(DataPositionType.Year, position);
                 UpdateModification();

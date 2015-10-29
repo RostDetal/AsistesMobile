@@ -5,8 +5,12 @@ import com.slk.asistes.Static.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by ViS on 21.10.15.
@@ -34,10 +38,29 @@ public class Product {
             totalOnHand = data.getInt("total_on_hand");
             availableOn = data.getString("available_on");
 
+            try
+            {
+                ParseDate(availableOn);
+            }catch(ParseException pe)
+            {
+                pe.printStackTrace();
+            }
+
         }catch(JSONException ex){
             ex.printStackTrace();
         }
 
+    }
+
+    private Date ParseDate(String data) throws ParseException {
+        //2015-10-04T00:00:00.000Z
+        String[] tempSplitted = data.split("[T]");
+        String stringDate = tempSplitted[0];
+
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = format.parse(stringDate);
+
+        return date;
     }
 
     public final int ID(){ return Id; }
