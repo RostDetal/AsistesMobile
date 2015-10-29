@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteCursor;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.ArraySet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,8 @@ import com.slk.asistes.Static.Logger;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Hashtable;
 
 import javax.security.auth.login.LoginException;
 
@@ -43,7 +46,7 @@ public class SearchTabContentFragment extends Fragment{
         String Year = "YearPotition";
     }
 
-    private interface DataType{
+    public interface DataType{
         String Brand = "Brand";
         String Model = "Model";
         String Modification = "Modification";
@@ -113,19 +116,13 @@ public class SearchTabContentFragment extends Fragment{
         BrandsCursorAdapter cursor = new BrandsCursorAdapter(getActivity(), brandsCursor, 0);
 
         brandsSpinner.setAdapter(cursor);
-        brandsSpinner.setSelection(GetPosition(brandsSpinner, DataPositionType.Brand));
+        brandsSpinner.setSelection(GetPosition(brandsSpinner, DataType.Brand));
 
         brandsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SQLiteCursor cursor = (SQLiteCursor) brandsSpinner.getSelectedItem();
-                int brandId = cursor.getInt(cursor.getColumnIndex(AsistesDataBaseContract.BrandEntry._ID));
-
-
-                ApplicationContext.Instance().DataManager().SetLiveData(DataType.Brand, brandId);
-                ApplicationContext.Instance().DataManager().SetLiveData(DataPositionType.Brand, position);
-
-                UpdateModels(brandId);
+                SaveData(DataType.Brand, brandsSpinner.getSelectedItem(), position, id);
+                UpdateModels(id);
             }
 
             @Override
@@ -137,7 +134,7 @@ public class SearchTabContentFragment extends Fragment{
     }
 
 
-    private void UpdateModels(int brand_id)
+    private void UpdateModels(long brand_id)
     {
         AsistesDBHelper sbHelper = new AsistesDBHelper(getActivity());
         Cursor modelsByBrandCursor = sbHelper.GetModelsByBrand(brand_id);
@@ -146,18 +143,13 @@ public class SearchTabContentFragment extends Fragment{
         modelsSpinner = (Spinner)getActivity().findViewById(R.id.spinner_models);
 
         modelsSpinner.setAdapter(modelsAdapter);
-        modelsSpinner.setSelection(GetPosition(modelsSpinner, DataPositionType.Model));
+        modelsSpinner.setSelection(GetPosition(modelsSpinner, DataType.Model));
 
         modelsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SQLiteCursor cursor = (SQLiteCursor) modelsSpinner.getSelectedItem();
-                int modelId = cursor.getInt(cursor.getColumnIndex(AsistesDataBaseContract.ModelEntry._ID));
-
-                ApplicationContext.Instance().DataManager().SetLiveData(DataType.Model, modelId);
-                ApplicationContext.Instance().DataManager().SetLiveData(DataPositionType.Model, position);
-
-                UpdateYears(modelId);
+                SaveData(DataType.Model, modelsSpinner.getSelectedItem(), position, id);
+                UpdateYears(id);
             }
 
             @Override
@@ -173,25 +165,22 @@ public class SearchTabContentFragment extends Fragment{
     {
         AsistesDBHelper sbHelper = new AsistesDBHelper(getActivity());
 
-        int model_id = (int)ApplicationContext.Instance().DataManager().GetLiveData(DataType.Model);
-        int year = (int)ApplicationContext.Instance().DataManager().GetLiveData(DataType.Year);
+        long model_id = (long)GetValue(DataType.Model, false);
+        int year = Integer.valueOf((String)GetValue(DataType.Year, true));
 
-         Cursor modifCursor = sbHelper.GetModificationsByModelIdAndYears(model_id, year);
+        Cursor modifCursor = sbHelper.GetModificationsByModelIdAndYears(model_id, year);
 
 
         ModificationsCursorAdapter modifAdapter = new ModificationsCursorAdapter(getActivity(),modifCursor,0);
         modificationsSpinner = (Spinner)getActivity().findViewById(R.id.spinner_modifications);
 
         modificationsSpinner.setAdapter(modifAdapter);
-        modificationsSpinner.setSelection(GetPosition(modificationsSpinner, DataPositionType.Modification));
+        modificationsSpinner.setSelection(GetPosition(modificationsSpinner, DataType.Modification));
 
         modificationsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SQLiteCursor cursor = (SQLiteCursor) modificationsSpinner.getSelectedItem();
-                int model_id = cursor.getInt(cursor.getColumnIndex(AsistesDataBaseContract.ModificationEntry.COLUMN_NAME_MODEL_ID));
-                ApplicationContext.Instance().DataManager().SetLiveData(DataType.Modification, model_id);
-                ApplicationContext.Instance().DataManager().SetLiveData(DataPositionType.Modification, position);
+                SaveData(DataType.Modification, modificationsSpinner.getSelectedItem(), position, id);
             }
 
             @Override
@@ -204,7 +193,7 @@ public class SearchTabContentFragment extends Fragment{
     }
 
 
-    private void UpdateYears(int model_id)
+    private void UpdateYears(long model_id)
     {
 
         AsistesDBHelper sbHelper = new AsistesDBHelper(getActivity());
@@ -232,13 +221,13 @@ public class SearchTabContentFragment extends Fragment{
 
         yearsSpinner = (Spinner)getActivity().findViewById(R.id.spinner_year);
         yearsSpinner.setAdapter(years);
-        yearsSpinner.setSelection(GetPosition(yearsSpinner, DataPositionType.Year));
+        yearsSpinner.setSelection(GetPosition(yearsSpinner, DataType.Year));
 
         yearsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ApplicationContext.Instance().DataManager().SetLiveData(DataType.Year, Integer.valueOf((String) yearsSpinner.getSelectedItem()));
-                ApplicationContext.Instance().DataManager().SetLiveData(DataPositionType.Year, position);
+
+                SaveData(DataType.Year, yearsSpinner.getSelectedItem(), position, id);
                 UpdateModification();
             }
 
@@ -259,9 +248,59 @@ public class SearchTabContentFragment extends Fragment{
 
     private int GetPosition(Spinner spinner, String type)
     {
-        int position = ApplicationContext.Instance().DataManager().GetLiveData(type) == null ? 0 : (int)ApplicationContext.Instance().DataManager().GetLiveData(type);
+        int position = 0;
+        if(ApplicationContext.Instance().DataManager().GetLiveData(type)!=null)
+        {
+            HashMap<Integer, String> data = (HashMap<Integer, String>)ApplicationContext.Instance().DataManager().GetLiveData(type);
+            position = (int)data.keySet().toArray()[0];
+        }
+
         int result = position > (spinner.getCount()-1) ? 0 : position;
         return result;
+    }
+
+    private Object GetValue(String type, boolean needName)
+    {
+        HashMap<Integer, ArrayList<Object>> globalData =   (HashMap<Integer, ArrayList<Object>>)ApplicationContext.Instance().DataManager().GetLiveData(type);
+        ArrayList<Object> data = (ArrayList<Object>) globalData.values().toArray()[0];
+        return data.get(needName ? 1 : 0);
+    }
+
+    private void SaveData(String type, Object data, int position, long id)
+    {
+        HashMap<Integer, ArrayList<Object>> savedObject = new HashMap<Integer, ArrayList<Object>>();
+
+        int pos = position;
+        String name = "";
+        SQLiteCursor cursor;
+        switch (type)
+        {
+            case DataType.Brand:
+                cursor = (SQLiteCursor)data;
+                name = cursor.getString(cursor.getColumnIndex(AsistesDataBaseContract.BrandEntry.COLUMN_NAME_TITLE));
+                break;
+
+            case DataType.Model:
+                cursor = (SQLiteCursor)data;
+                name = cursor.getString(cursor.getColumnIndex(AsistesDataBaseContract.ModelEntry.COLUMN_NAME_TITLE));
+                break;
+
+            case DataType.Modification:
+                cursor = (SQLiteCursor)data;
+                name = cursor.getString(cursor.getColumnIndex(AsistesDataBaseContract.ModificationEntry.COLUMN_NAME_TITLE));
+                break;
+
+            case DataType.Year:
+                name = (String) data;
+                break;
+        }
+
+        ArrayList<Object> values = new ArrayList<Object>();
+        values.add(id);
+        values.add(name);
+
+        savedObject.put(pos, values);
+        ApplicationContext.Instance().DataManager().SetLiveData(type,savedObject);
     }
 
 

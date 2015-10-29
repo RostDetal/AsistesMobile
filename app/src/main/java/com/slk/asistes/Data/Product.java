@@ -25,6 +25,7 @@ public class Product {
     private String availableOn;
     private ArrayList<String> images = new ArrayList<String>();
     private String sku;
+    private String type;
 
     public Product(JSONObject data)
     {
@@ -33,14 +34,15 @@ public class Product {
             productName = data.getString("name");
             description = data.getString("description");
             slug = data.getString("slug");
+            //type = data.getString("type");
             price = data.getInt("price");
             images.add("http://stage.asistes.com/system/products/5/large/1-s.png?1444804983");
             totalOnHand = data.getInt("total_on_hand");
-            availableOn = data.getString("available_on");
+            String tempDate = data.getString("available_on");
 
             try
             {
-                ParseDate(availableOn);
+                availableOn = ParseDate(tempDate);
             }catch(ParseException pe)
             {
                 pe.printStackTrace();
@@ -52,15 +54,18 @@ public class Product {
 
     }
 
-    private Date ParseDate(String data) throws ParseException {
-        //2015-10-04T00:00:00.000Z
+    private String ParseDate(String data) throws ParseException {
         String[] tempSplitted = data.split("[T]");
         String stringDate = tempSplitted[0];
 
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        Date date = format.parse(stringDate);
+        DateFormat fromFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = fromFormat.parse(stringDate);
 
-        return date;
+        String toFormat = "dd MMMM yyyy";
+        DateFormat toformatter = new SimpleDateFormat(toFormat,Locale.getDefault());
+        String result = toformatter.format(date);
+
+        return result;
     }
 
     public final int ID(){ return Id; }

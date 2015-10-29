@@ -9,7 +9,7 @@ import com.google.android.gms.analytics.Tracker;
 /**
  * Created by VIS on 28.10.2015.
  */
-public class App extends Application {
+public class AsistesApplication extends Application {
 
     public static GoogleAnalytics analytics;
     public static Tracker tracker;

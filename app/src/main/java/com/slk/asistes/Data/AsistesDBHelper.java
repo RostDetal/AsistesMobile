@@ -187,7 +187,7 @@ public class AsistesDBHelper extends SQLiteAssetHelper {
         return retCursor;
     }
 
-    public Cursor GetModelsByBrand(int brand_id)
+    public Cursor GetModelsByBrand(long brand_id)
     {
         Cursor retCursor;
         SQLiteDatabase database = getReadableDatabase();
@@ -206,7 +206,7 @@ public class AsistesDBHelper extends SQLiteAssetHelper {
         return retCursor;
     }
 
-    public Cursor GetModificationsByModelIdAndYears(int model_id, int year)
+    public Cursor GetModificationsByModelIdAndYears(long model_id, int year)
     {
         Cursor retCursor;
         SQLiteDatabase database = getReadableDatabase();
@@ -216,7 +216,7 @@ public class AsistesDBHelper extends SQLiteAssetHelper {
         return retCursor;
     }
 
-    public Cursor GetYearsByModelId(int model_id)
+    public Cursor GetYearsByModelId(long model_id)
     {
         Cursor retCursor;
         SQLiteDatabase database = getReadableDatabase();

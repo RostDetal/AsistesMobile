@@ -43,6 +43,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         public TextView countLabel;
         public TextView sellerLabel;
         public TextView locationLabel;
+        public TextView availableLabel;
         public ImageView productImage;
         public CardView currentCardView;
         private ItemClickListener clickListener;
@@ -60,6 +61,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
             artikulLabel = (TextView)itemView.findViewById(R.id.card_sku);
             sellerLabel = (TextView)itemView.findViewById(R.id.card_seller);
             locationLabel = (TextView)itemView.findViewById(R.id.card_location);
+            availableLabel = (TextView)itemView.findViewById(R.id.card_available);
         }
 
         public void setClickListener(ItemClickListener itemClickListener) {
@@ -94,6 +96,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         int price = mDataset.get(position).Price();
         int count = mDataset.get(position).TotalOnHand();
         String sku = mDataset.get(position).Sku();
+        String available = mDataset.get(position).AvailableOn();
         String image_path = mDataset.get(position).Images().get(0);
 
         Context context =  ApplicationContext.Instance().getAndroidContext();
@@ -108,7 +111,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         holder.priceLabel.setText(price+" "+ Utils.RUBLE);
         holder.countLabel.setText(context.getString(R.string.product_count)+" "+count );
         holder.artikulLabel.setText(context.getString(R.string.product_artikul)+ " " +sku);
-        holder.sellerLabel.setText(context.getString(R.string.product_seller) + " " + sku);
+//        holder.sellerLabel.setText(context.getString(R.string.product_seller) + " " + sku);
+        holder.availableLabel.setText(context.getString(R.string.product_available) + " " + available);
 
         holder.setClickListener(new ItemClickListener() {
             @Override

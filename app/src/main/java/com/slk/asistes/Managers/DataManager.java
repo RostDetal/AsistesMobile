@@ -27,7 +27,10 @@ public class DataManager extends BaseManager {
     private ArrayList<Product> _products;
 
     public boolean IsDatabaseCreationInProgress = false;
-
+    public ArrayList<Product> LiveProducts()
+    {
+        return _products;
+    }
 
     public DataManager(){
         Init();
@@ -65,11 +68,6 @@ public class DataManager extends BaseManager {
         }
     }
 
-    public ArrayList<Product> LiveProducts()
-    {
-        return _products;
-    }
-
     public Product GetLiveProductByID(int _id)
     {
         for (int i=0; i<_products.size(); i++)
@@ -100,6 +98,7 @@ public class DataManager extends BaseManager {
         }
     }
 
+    //для чтения текстовых файлов
     public StringBuilder GetTextFileContentFromAssets(Context context, String file_name)
     {
         StringBuilder total = null;
@@ -124,3 +123,4 @@ public class DataManager extends BaseManager {
 
 
 }
+
