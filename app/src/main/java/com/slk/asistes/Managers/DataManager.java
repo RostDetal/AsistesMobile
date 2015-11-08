@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 /**
@@ -68,6 +69,13 @@ public class DataManager extends BaseManager {
         }
     }
 
+    public Object GetLiveValue(String type, boolean needName)
+    {
+        HashMap<Integer, ArrayList<Object>> globalData =   (HashMap<Integer, ArrayList<Object>>)ApplicationContext.Instance().DataManager().GetLiveData(type);
+        ArrayList<Object> data = (ArrayList<Object>) globalData.values().toArray()[0];
+        return data.get(needName ? 1 : 0);
+    }
+
     public Product GetLiveProductByID(int _id)
     {
         for (int i=0; i<_products.size(); i++)
@@ -83,9 +91,8 @@ public class DataManager extends BaseManager {
     public void ParseProducts(String data)
     {
         try {
-            JSONObject obj = new JSONObject(data);
-            JSONArray productsArray = obj.getJSONArray(Utils.DATAMANAGER_PRODUCTS_KEY);
 
+            JSONArray productsArray = new JSONArray(data);
             for (int i = 0; i < productsArray.length(); i++) {
                 try {
                     _products.add(new Product(productsArray.getJSONObject(i)));

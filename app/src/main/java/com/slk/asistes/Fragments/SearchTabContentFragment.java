@@ -23,6 +23,7 @@ import com.slk.asistes.Adapters.ModelsCursorAdapter;
 import com.slk.asistes.Adapters.ModificationsCursorAdapter;
 import com.slk.asistes.Data.AsistesDBHelper;
 import com.slk.asistes.Data.AsistesDataBaseContract;
+import com.slk.asistes.Managers.DataManager;
 import com.slk.asistes.R;
 import com.slk.asistes.Static.ApplicationContext;
 import com.slk.asistes.Static.Logger;
@@ -58,6 +59,8 @@ public class SearchTabContentFragment extends Fragment{
     private Spinner modelsSpinner;
     private Spinner yearsSpinner;
     private Spinner modificationsSpinner;
+
+    private DataManager dataManager = ApplicationContext.Instance().DataManager();
 
     public interface SearchContentCallback {
         void onButtonSearchClick(String _search_text);
@@ -165,8 +168,8 @@ public class SearchTabContentFragment extends Fragment{
     {
         AsistesDBHelper sbHelper = new AsistesDBHelper(getActivity());
 
-        long model_id = (long)GetValue(DataType.Model, false);
-        int year = Integer.valueOf((String)GetValue(DataType.Year, true));
+        long model_id = (long)dataManager.GetLiveValue(DataType.Model, false);
+        int year = Integer.valueOf((String) dataManager.GetLiveValue(DataType.Year, true));
 
         Cursor modifCursor = sbHelper.GetModificationsByModelIdAndYears(model_id, year);
 
@@ -239,13 +242,6 @@ public class SearchTabContentFragment extends Fragment{
 
     }
 
-    private void InitSelectedItems()
-    {
-        ApplicationContext.Instance().DataManager().SetLiveData("model", 0);
-        ApplicationContext.Instance().DataManager().SetLiveData("modification", 0);
-        ApplicationContext.Instance().DataManager().SetLiveData("year", 0);
-    }
-
     private int GetPosition(Spinner spinner, String type)
     {
         int position = 0;
@@ -259,12 +255,7 @@ public class SearchTabContentFragment extends Fragment{
         return result;
     }
 
-    private Object GetValue(String type, boolean needName)
-    {
-        HashMap<Integer, ArrayList<Object>> globalData =   (HashMap<Integer, ArrayList<Object>>)ApplicationContext.Instance().DataManager().GetLiveData(type);
-        ArrayList<Object> data = (ArrayList<Object>) globalData.values().toArray()[0];
-        return data.get(needName ? 1 : 0);
-    }
+
 
     private void SaveData(String type, Object data, int position, long id)
     {

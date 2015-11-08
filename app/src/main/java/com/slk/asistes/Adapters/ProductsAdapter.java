@@ -97,12 +97,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         int count = mDataset.get(position).TotalOnHand();
         String sku = mDataset.get(position).Sku();
         String available = mDataset.get(position).AvailableOn();
-        String image_path = mDataset.get(position).Images().get(0);
+        String previewPath = mDataset.get(position).PreviewUrl();
 
         Context context =  ApplicationContext.Instance().getAndroidContext();
 
         Glide.with(ApplicationContext.Instance().getAndroidContext())
-                .load(image_path)
+                .load(previewPath)
                 .asBitmap()
                 .centerCrop()
                 .into(holder.productImage);

@@ -2,18 +2,24 @@ package com.slk.asistes.Tasks;
 
 import android.os.AsyncTask;
 import com.slk.asistes.Activities.ResultsDataActivity;
+import com.slk.asistes.Fragments.SearchTabContentFragment.DataType;
+import com.slk.asistes.Managers.DataManager;
 import com.slk.asistes.Static.ApplicationContext;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by VIS on 18.10.2015.
  */
 public class SearchProductsTask extends AsyncTask <String, Void, String>
 {
+
+    DataManager dataManager;
 
     final ResultsDataActivity.ProductLoadedCallback callback;
 
@@ -23,6 +29,7 @@ public class SearchProductsTask extends AsyncTask <String, Void, String>
 
     public SearchProductsTask(ResultsDataActivity.ProductLoadedCallback callback) {
         this.callback = callback;
+        dataManager = ApplicationContext.Instance().DataManager();
     }
 
 
@@ -34,7 +41,12 @@ public class SearchProductsTask extends AsyncTask <String, Void, String>
 
     private String GetData()  throws IOException
     {
-        String temp_url = "http://stage.asistes.com/api/products?token="+token+"&q[name_cont_any]="+searchData;
+
+        long brand =(long)dataManager.GetLiveValue(DataType.Brand, false);
+        long model =(long)dataManager.GetLiveValue(DataType.Model, false);
+        long modification =(long)dataManager.GetLiveValue(DataType.Modification, false);
+        //String temp_url = "http://stage.asistes.com/api/products?token="+token+"&q[name_cont_any]="+searchData;
+        String temp_url = "http://stage.asistes.com/api/v1/mobile/products?b="+brand+"&m="+model+"&md="+modification+"&keywords="+searchData;
         BufferedReader reader=null;
         try {
             URL url=new URL(temp_url);
