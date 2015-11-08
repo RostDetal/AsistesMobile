@@ -45,7 +45,6 @@ public class SearchProductsTask extends AsyncTask <String, Void, String>
         long brand =(long)dataManager.GetLiveValue(DataType.Brand, false);
         long model =(long)dataManager.GetLiveValue(DataType.Model, false);
         long modification =(long)dataManager.GetLiveValue(DataType.Modification, false);
-        //String temp_url = "http://stage.asistes.com/api/products?token="+token+"&q[name_cont_any]="+searchData;
         String temp_url = "http://stage.asistes.com/api/v1/mobile/products?b="+brand+"&m="+model+"&md="+modification+"&keywords="+searchData;
         BufferedReader reader=null;
         try {

@@ -96,6 +96,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         int price = mDataset.get(position).Price();
         int count = mDataset.get(position).TotalOnHand();
         String sku = mDataset.get(position).Sku();
+        String location = mDataset.get(position).Location();
         String available = mDataset.get(position).AvailableOn();
         String previewPath = mDataset.get(position).PreviewUrl();
 
@@ -111,6 +112,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ViewHo
         holder.priceLabel.setText(price+" "+ Utils.RUBLE);
         holder.countLabel.setText(context.getString(R.string.product_count)+" "+count );
         holder.artikulLabel.setText(context.getString(R.string.product_artikul)+ " " +sku);
+        holder.locationLabel.setText(location);
 //        holder.sellerLabel.setText(context.getString(R.string.product_seller) + " " + sku);
         holder.availableLabel.setText(context.getString(R.string.product_available) + " " + available);
 

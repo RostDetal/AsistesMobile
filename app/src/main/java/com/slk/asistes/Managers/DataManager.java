@@ -92,7 +92,9 @@ public class DataManager extends BaseManager {
     {
         try {
 
-            JSONArray productsArray = new JSONArray(data);
+            JSONObject obj = new JSONObject(data);
+            JSONArray productsArray = obj.getJSONArray(Utils.DATAMANAGER_PRODUCTS_KEY);
+
             for (int i = 0; i < productsArray.length(); i++) {
                 try {
                     _products.add(new Product(productsArray.getJSONObject(i)));

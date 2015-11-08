@@ -29,6 +29,7 @@ public class Product {
     private int disassemblyId;
     private String previewUrl;
     private String currencyType;
+    private String location;
 
     public Product(JSONObject data)
     {
@@ -44,6 +45,7 @@ public class Product {
             previewUrl = data.getString("preview").length()>0 ? data.getString("preview") : "http://stage.asistes.com/assets/noimage/mini-7c32975a7a438d2e002f8b0964e25ad0.png";
             sku = data.getString("sku");
             currencyType =  data.getString("currency");
+            location = data.getString("location");
 
 
             String tempDate = data.getString("available_on");
@@ -87,4 +89,5 @@ public class Product {
     public final String Sku(){ return sku == null ? "" : sku; }
     public final String PreviewUrl(){ return previewUrl; }
     public final String CurrencyType(){ return currencyType; }
+    public final String Location(){ return location; }
 }
