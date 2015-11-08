@@ -26,6 +26,7 @@ public class Product {
     private ArrayList<String> images = new ArrayList<String>();
     private String sku;
     private String type;
+    private int disassemblyId;
     private String previewUrl;
     private String currencyType;
 
@@ -35,10 +36,9 @@ public class Product {
             Id = data.getInt("id");
             productName = data.getString("name");
             description = data.getString("description");
-            slug = data.getString("slug");
+            //slug = data.getString("slug");
             price = data.getInt("cost");
-
-
+            disassemblyId = data.getInt("disassembly_id");
             images.add("http://stage.asistes.com/system/products/5/large/1-s.png?1444804983");
             totalOnHand = data.getInt("total_on_hand");
             previewUrl = data.getString("preview").length()>0 ? data.getString("preview") : "http://stage.asistes.com/assets/noimage/mini-7c32975a7a438d2e002f8b0964e25ad0.png";
